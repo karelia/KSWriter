@@ -36,37 +36,37 @@
 
 - (void)writeString:(NSString *)string;
 {
-    CFDataRef data = CFStringCreateExternalRepresentation(NULL,
-                                                          (CFStringRef)string,
-                                                          CFStringConvertNSStringEncodingToEncoding([self encoding]),
-                                                          0);
+#define BUFFER_LENGTH 1024
+    UInt8 buffer[BUFFER_LENGTH];
     
-    /*CFIndex chars = CFStringGetBytes((CFStringRef)string,
-                                     CFRangeMake(0, CFStringGetLength((CFStringRef)string)),
-                                     CFStringConvertNSStringEncodingToEncoding([self encoding]),
-                                     <#UInt8 lossByte#>,
-                                     <#Boolean isExternalRepresentation#>,
-                                     <#UInt8 *buffer#>,
-                                     <#CFIndex maxBufLen#>,
-                                     <#CFIndex *usedBufLen#>);
-    */
+    CFRange range = CFRangeMake(0, CFStringGetLength((CFStringRef)string));
     
-    
-    CFIndex length = CFDataGetLength(data);
-    NSInteger written = [_outputStream write:CFDataGetBytePtr(data) maxLength:length];
-    
-    while (written < length)
+    while (range.length)
     {
-        if (written > 0)
+        CFIndex length;
+        CFIndex chars = CFStringGetBytes((CFStringRef)string,
+                                         range,
+                                         CFStringConvertNSStringEncodingToEncoding([self encoding]),
+                                         0,
+                                         YES,
+                                         buffer,
+                                         BUFFER_LENGTH,
+                                         &length);
+        
+        
+        NSInteger written = [_outputStream write:buffer maxLength:length];
+        
+        while (written < length)
         {
-            NSData *subdata = [(NSData *)data subdataWithRange:NSMakeRange(written, length - written)];
-            length = CFDataGetLength((CFDataRef)subdata);
-            
-            written = [_outputStream write:[subdata bytes] maxLength:length];
+            if (written > 0)
+            {
+                length -= written;
+                written = [_outputStream write:&buffer[written] maxLength:length];
+            }
         }
+        
+        range = CFRangeMake(range.location + chars, range.length - chars);
     }
-    
-    CFRelease(data);
 }
 
 - (void)close;
