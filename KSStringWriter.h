@@ -28,7 +28,7 @@
 #import "KSWriter.h"
 
 
-@interface KSStringWriter : NSObject <KSWriter>
+@interface KSStringWriter : NSObject <KSBufferingWriter>
 {
   @private
     NSMutableString *_buffer;
@@ -47,7 +47,6 @@
 
 - (void)beginBuffering; // can be called multiple times to set up a stack of buffers.
 - (void)discardBuffer;  // discards the most recent buffer
-- (void)flush;          // end buffering by pushing all buffers through to main string
 
 - (void)flushOnNextWrite;   // calls -flush at next write. Can still use -discardBuffer to effectively cancel this
 - (void)cancelFlushOnNextWrite;

@@ -103,6 +103,19 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
     [_bufferPoints replacePointerAtIndex:0 withPointer:(void *)insertionPoint];
 }
 
+- (void)writeString:(NSString *)string bypassBuffer:(BOOL)bypassBuffer;
+{
+    if (bypassBuffer)
+    {
+        NSUInteger index = (NSUInteger)[_bufferPoints pointerAtIndex:([_bufferPoints count] - 1)];
+        [self insertString:string atIndex:index];
+    }
+    else
+    {
+        [self writeString:string];
+    }
+}
+
 - (void)close;
 {
     // Prune the buffer back down to size
@@ -123,6 +136,11 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
 }
 
 #pragma mark Buffering
+
+- (void)startBuffering; // can be called multiple times, implementor chooses how to handle that
+{
+    [self beginBuffering];
+}
 
 // Can be called multiple times to set up a stack of buffers.
 - (void)beginBuffering;

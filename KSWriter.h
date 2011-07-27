@@ -34,5 +34,12 @@
 @end
 
 
+@protocol KSBufferingWriter <KSWriter>
+- (void)startBuffering; // can be called multiple times, implementor chooses how to handle that
+- (void)flush;          // end buffering by pushing all buffers through to main string
+- (void)writeString:(NSString *)string bypassBuffer:(BOOL)bypassBuffer;
+@end
+
+
 @interface NSMutableString (KSWriter) <KSWriter>
 @end
