@@ -164,6 +164,11 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
     [_bufferPoints insertPointer:(void *)[self insertionPoint] atIndex:0];
 }
 
+- (void)flushFirstBuffer;
+{
+    [_bufferPoints removePointerAtIndex:([_bufferPoints count] - 1)];
+}
+
 // Discards the most recent buffer. If there's a lower one in the stack, that is restored
 - (void)discardBuffer;  
 {

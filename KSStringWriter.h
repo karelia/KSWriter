@@ -28,7 +28,7 @@
 #import "KSWriter.h"
 
 
-@interface KSStringWriter : NSObject <KSBufferingWriter>
+@interface KSStringWriter : NSObject <KSMultiBufferingWriter>
 {
   @private
     NSMutableString *_buffer;
