@@ -44,6 +44,7 @@
 @protocol KSMultiBufferingWriter <KSBufferingWriter>
 - (void)startBuffering;     // each call is expected to start a new distinct buffer, while maintaining the old
 - (void)flushFirstBuffer;   // thus you can stagger beginning and ending buffers
+- (NSUInteger)numberOfBuffers;
 @end
 
 

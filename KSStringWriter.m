@@ -140,6 +140,11 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
 }
 #endif
 
+- (NSUInteger)numberOfBuffers;
+{
+    return [_bufferPoints count] - 1;
+}
+
 - (void)startBuffering; // can be called multiple times, implementor chooses how to handle that
 {
     [self beginBuffering];
