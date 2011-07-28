@@ -137,6 +137,22 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
 
 #pragma mark Buffering
 
+#ifdef DEBUG
+- (NSArray *)bufferPoints;
+{
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[_bufferPoints count]];
+    
+    NSUInteger i, count = [_bufferPoints count];
+    for (i = 0; i < count; i++)
+    {
+        NSUInteger anIndex = (NSUInteger)[_bufferPoints pointerAtIndex:i];
+        [result addObject:[NSNumber numberWithUnsignedInteger:anIndex]];
+    }
+    
+    return result;
+}
+#endif
+
 - (void)startBuffering; // can be called multiple times, implementor chooses how to handle that
 {
     [self beginBuffering];
