@@ -48,13 +48,12 @@
 - (void)beginBuffering; // can be called multiple times to set up a stack of buffers.
 - (void)discardBuffer;  // discards the most recent buffer
 
+- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
+
+
+#pragma mark Flush-on-write
 - (void)flushOnNextWrite;   // calls -flush at next write. Can still use -discardBuffer to effectively cancel this
 - (void)cancelFlushOnNextWrite;
-
-
-#pragma mark Special
-// This is more for the benefit of Sandvox. Will try to improve later.
-- (void)insertString:(NSString *)aString atIndex:(NSUInteger)anIndex;
 
 
 @end

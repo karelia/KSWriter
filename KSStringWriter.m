@@ -103,19 +103,6 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
     [_bufferPoints replacePointerAtIndex:0 withPointer:(void *)insertionPoint];
 }
 
-- (void)writeString:(NSString *)string bypassBuffer:(BOOL)bypassBuffer;
-{
-    if (bypassBuffer)
-    {
-        NSUInteger index = (NSUInteger)[_bufferPoints pointerAtIndex:([_bufferPoints count] - 1)];
-        [self insertString:string atIndex:index];
-    }
-    else
-    {
-        [self writeString:string];
-    }
-}
-
 - (void)close;
 {
     // Prune the buffer back down to size
@@ -190,26 +177,41 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
     _flushOnNextWrite = NO;
 }
 
-- (void)flushOnNextWrite; { _flushOnNextWrite = YES; }
-
-- (void)cancelFlushOnNextWrite; { _flushOnNextWrite = NO; }
-
-#pragma mark Special
-
-- (void)insertString:(NSString *)aString atIndex:(NSUInteger)anIndex
+- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
 {
-    NSParameterAssert(anIndex <= [self length]);
+    NSUInteger invertedIndex = [_bufferPoints count] - 1 - index;
+    NSUInteger insertionPoint = (NSUInteger)[_bufferPoints pointerAtIndex:invertedIndex];
     
-    [_buffer insertString:aString atIndex:anIndex];
     
-    NSUInteger i, count = [_bufferPoints count];
+    NSParameterAssert(insertionPoint <= [self insertionPoint]);
+    [_buffer insertString:string atIndex:insertionPoint];
+    
+    NSUInteger i, count = invertedIndex + 1;
     for (i = 0; i < count; i++)
     {
         NSUInteger ind = (NSUInteger)[_bufferPoints pointerAtIndex:i];
-        ind += [aString length];
+        ind += [string length];
         [_bufferPoints replacePointerAtIndex:i withPointer:(void *)ind];
     }
 }
+
+- (void)writeString:(NSString *)string bypassBuffer:(BOOL)bypassBuffer;
+{
+    if (bypassBuffer)
+    {
+        [self writeString:string toBufferAtIndex:0];
+    }
+    else
+    {
+        [self writeString:string];
+    }
+}
+
+#pragma mark Flush-on-write
+
+- (void)flushOnNextWrite; { _flushOnNextWrite = YES; }
+
+- (void)cancelFlushOnNextWrite; { _flushOnNextWrite = NO; }
 
 #pragma mark Debug
 
