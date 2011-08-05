@@ -122,6 +122,19 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
     [_bufferPoints addPointer:0];
 }
 
+- (void)discardString;          // leaves only buffered content
+{
+    NSUInteger length = [self length];
+    [_buffer deleteCharactersInRange:NSMakeRange(0, length)];
+    
+    NSUInteger i, count = [_bufferPoints count];
+    for (i = 0; i < count; i++)
+    {
+        [_bufferPoints replacePointerAtIndex:i
+                                 withPointer:(void *)((NSUInteger)[_bufferPoints pointerAtIndex:i] - length)];
+    }
+}
+
 #pragma mark Buffering
 
 #ifdef DEBUG

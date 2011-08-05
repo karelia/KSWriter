@@ -41,14 +41,12 @@
 
 - (void)removeAllCharacters;    // reset, but cunningly keeps memory allocated for speed
 - (void)close;                  // no effect on output/state, but frees any unused memory
-
+- (void)discardString;          // leaves only buffered content
 
 #pragma mark Buffering
 
 - (void)beginBuffering; // can be called multiple times to set up a stack of buffers.
 - (void)discardBuffer;  // discards the most recent buffer
-
-- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
 
 
 #pragma mark Flush-on-write
