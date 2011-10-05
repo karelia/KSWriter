@@ -8,7 +8,7 @@
 //  Converts incoming strings to data and writes them to an NSOutputStream
 
 
-#import <KSWriter.h>
+#import "KSWriter.h"
 
 
 @interface KSOutputStreamWriter : NSObject <KSWriter>
