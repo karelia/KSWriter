@@ -11,19 +11,22 @@
 
 @implementation KSOutputStreamWriter
 
-- (id)initWithOutputStream:(NSOutputStream *)outputStream encoding:(NSStringEncoding)encoding;
+- (id)initWithOutputStream:(NSOutputStream *)outputStream
+                  encoding:(NSStringEncoding)encoding
+         precomposeStrings:(BOOL)precompose;
 {
     [self init];
     
     _outputStream = [outputStream retain];
     _encoding = encoding;
+    _precompose = precompose;
     
     return self;
 }
 
 - (id)initWithOutputStream:(NSOutputStream *)outputStream;  // uses UTF8 encoding
 {
-    return [self initWithOutputStream:outputStream encoding:NSUTF8StringEncoding];
+    return [self initWithOutputStream:outputStream encoding:NSUTF8StringEncoding precomposeStrings:NO];
 }
 
 - (void)dealloc;
@@ -36,6 +39,14 @@
 
 - (void)writeString:(NSString *)string;
 {
+    // Precompose if requested
+    if (_precompose)
+    {
+        NSMutableString *precomposed = [string mutableCopy];    // will be released at end of method
+        CFStringNormalize((CFMutableStringRef)precomposed, kCFStringNormalizationFormC);
+        string = precomposed;
+    }
+    
 #define BUFFER_LENGTH 1024
     UInt8 buffer[BUFFER_LENGTH];
     
@@ -67,6 +78,9 @@
         
         range = CFRangeMake(range.location + chars, range.length - chars);
     }
+    
+    
+    if (_precompose) [string release];  // was created by -mutableCopy above
 }
 
 - (void)close;
