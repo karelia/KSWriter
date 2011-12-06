@@ -28,6 +28,12 @@
     [_output release]; _output = nil;
 }
 
+- (void)dealloc;
+{
+    [self close];
+    [super dealloc];
+}
+
 #pragma mark Writing
 
 - (void)writeString:(NSString *)string;
