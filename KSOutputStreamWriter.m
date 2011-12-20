@@ -37,16 +37,8 @@
 
 @synthesize encoding = _encoding;
 
-- (void)writeString:(NSString *)string;
+- (void)writePreprocessedString:(NSString *)string;
 {
-    // Precompose if requested
-    if (_precompose)
-    {
-        NSMutableString *precomposed = [string mutableCopy];    // will be released at end of method
-        CFStringNormalize((CFMutableStringRef)precomposed, kCFStringNormalizationFormC);
-        string = precomposed;
-    }
-    
 #define BUFFER_LENGTH 1024
     UInt8 buffer[BUFFER_LENGTH];
     
@@ -78,9 +70,22 @@
         
         range = CFRangeMake(range.location + chars, range.length - chars);
     }
-    
-    
-    if (_precompose) [string release];  // was created by -mutableCopy above
+}
+
+- (void)writeString:(NSString *)string;
+{
+    // Precompose if requested
+    if (_precompose)
+    {
+        NSMutableString *precomposed = [string mutableCopy];
+        CFStringNormalize((CFMutableStringRef)precomposed, kCFStringNormalizationFormC);
+        [self writePreprocessedString:precomposed];
+        [precomposed release];
+    }
+    else
+    {
+        [self writePreprocessedString:string];
+    }
 }
 
 - (void)close;
