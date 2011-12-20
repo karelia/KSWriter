@@ -13,10 +13,11 @@
 
 - (id)initWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
 {
-    [self init];
-    
-    _data = [data retain];
-    _encoding = encoding;
+    if (self = [self init])
+    {
+        _data = [data retain];
+        _encoding = encoding;
+    }
     
     return self;
 }
