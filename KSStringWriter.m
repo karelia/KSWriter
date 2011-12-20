@@ -35,12 +35,13 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
 
 - (id)init;
 {
-    [super init];
-    
-    _buffer = [[NSMutableString alloc] init];
-    
-    _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
-    [_bufferPoints addPointer:0];
+    if (self = [super init])
+    {
+        _buffer = [[NSMutableString alloc] init];
+        
+        _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
+        [_bufferPoints addPointer:0];
+    }
     
     return self;
 }
