@@ -34,10 +34,10 @@
 
 - (id)initWithOutputWriter:(id <KSWriter>)output; // designated initializer
 {
-    [super init];
-    
-    _writer = [output retain];
-    
+    if (self = [super init])
+    {
+        _writer = [output retain];
+    }
     return self;
 }
 
