@@ -15,11 +15,12 @@
                   encoding:(NSStringEncoding)encoding
          precomposeStrings:(BOOL)precompose;
 {
-    [self init];
-    
-    _outputStream = [outputStream retain];
-    _encoding = encoding;
-    _precompose = precompose;
+    if (self = [self init])
+    {
+        _outputStream = [outputStream retain];
+        _encoding = encoding;
+        _precompose = precompose;
+    }
     
     return self;
 }
