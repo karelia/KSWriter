@@ -70,7 +70,7 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
 
 - (void)getCharacters:(unichar *)buffer range:(NSRange)aRange;
 {
-    NSParameterAssert((aRange.location + aRange.length) <= [self length]);
+    NSParameterAssert(NSMaxRange(aRange) <= [self length]);
     return [_buffer getCharacters:buffer range:aRange];
 }
 
