@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22352B9414C6FCB00031F5DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9314C6FCB00031F5DD /* Cocoa.framework */; };
+		22352BA614C6FCB00031F5DD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352BA514C6FCB00031F5DD /* SenTestingKit.framework */; };
+		22352BA714C6FCB00031F5DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9314C6FCB00031F5DD /* Cocoa.framework */; };
+		22352BAA14C6FCB00031F5DD /* libKSWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9014C6FCB00031F5DD /* libKSWriter.a */; };
+		225BD9C014F27E1B00F277AE /* KSBufferedWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9B414F27E1A00F277AE /* KSBufferedWriter.h */; };
+		225BD9C114F27E1B00F277AE /* KSBufferedWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */; };
+		225BD9C214F27E1B00F277AE /* KSBufferedWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */; };
+		225BD9C314F27E1B00F277AE /* KSForwardingWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9B614F27E1A00F277AE /* KSForwardingWriter.h */; };
+		225BD9C414F27E1B00F277AE /* KSForwardingWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */; };
+		225BD9C514F27E1B00F277AE /* KSForwardingWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */; };
+		225BD9C614F27E1B00F277AE /* KSMutableDataWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9B814F27E1A00F277AE /* KSMutableDataWriter.h */; };
+		225BD9C714F27E1B00F277AE /* KSMutableDataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */; };
+		225BD9C814F27E1B00F277AE /* KSMutableDataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */; };
+		225BD9C914F27E1B00F277AE /* KSOutputStreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9BA14F27E1A00F277AE /* KSOutputStreamWriter.h */; };
+		225BD9CA14F27E1B00F277AE /* KSOutputStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BB14F27E1A00F277AE /* KSOutputStreamWriter.m */; };
+		225BD9CB14F27E1B00F277AE /* KSOutputStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BB14F27E1A00F277AE /* KSOutputStreamWriter.m */; };
+		225BD9CC14F27E1B00F277AE /* KSStringWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9BC14F27E1A00F277AE /* KSStringWriter.h */; };
+		225BD9CD14F27E1B00F277AE /* KSStringWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BD14F27E1A00F277AE /* KSStringWriter.m */; };
+		225BD9CE14F27E1B00F277AE /* KSStringWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BD14F27E1A00F277AE /* KSStringWriter.m */; };
+		225BD9CF14F27E1B00F277AE /* KSWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9BE14F27E1A00F277AE /* KSWriter.h */; };
+		225BD9D014F27E1B00F277AE /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; };
+		225BD9D114F27E1B00F277AE /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; };
+		225BD9DF14F27E8000F277AE /* Compound Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D414F27E8000F277AE /* Compound Tests.plist */; };
+		225BD9E014F27E8000F277AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D514F27E8000F277AE /* InfoPlist.strings */; };
+		225BD9E114F27E8000F277AE /* KSWriterTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9D814F27E8000F277AE /* KSWriterTestCase.m */; };
+		225BD9E214F27E8000F277AE /* KSWriterTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D914F27E8000F277AE /* KSWriterTests-Info.plist */; };
+		225BD9E314F27E8000F277AE /* KSMutableDataWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */; };
+		225BD9E414F27E8000F277AE /* KSOutputStreamWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */; };
+		225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22352BA814C6FCB00031F5DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22352B8714C6FCAF0031F5DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22352B8F14C6FCB00031F5DD;
+			remoteInfo = KSHTMLWriter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		22352B9014C6FCB00031F5DD /* libKSWriter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKSWriter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		22352B9314C6FCB00031F5DD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		22352B9614C6FCB00031F5DD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		22352B9714C6FCB00031F5DD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		22352B9814C6FCB00031F5DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		22352BA414C6FCB00031F5DD /* KSWriterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSWriterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22352BA514C6FCB00031F5DD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		225BD9B414F27E1A00F277AE /* KSBufferedWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSBufferedWriter.h; sourceTree = SOURCE_ROOT; };
+		225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSBufferedWriter.m; sourceTree = SOURCE_ROOT; };
+		225BD9B614F27E1A00F277AE /* KSForwardingWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSForwardingWriter.h; sourceTree = SOURCE_ROOT; };
+		225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSForwardingWriter.m; sourceTree = SOURCE_ROOT; };
+		225BD9B814F27E1A00F277AE /* KSMutableDataWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMutableDataWriter.h; sourceTree = SOURCE_ROOT; };
+		225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMutableDataWriter.m; sourceTree = SOURCE_ROOT; };
+		225BD9BA14F27E1A00F277AE /* KSOutputStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOutputStreamWriter.h; sourceTree = SOURCE_ROOT; };
+		225BD9BB14F27E1A00F277AE /* KSOutputStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOutputStreamWriter.m; sourceTree = SOURCE_ROOT; };
+		225BD9BC14F27E1A00F277AE /* KSStringWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSStringWriter.h; sourceTree = SOURCE_ROOT; };
+		225BD9BD14F27E1A00F277AE /* KSStringWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSStringWriter.m; sourceTree = SOURCE_ROOT; };
+		225BD9BE14F27E1A00F277AE /* KSWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSWriter.h; sourceTree = SOURCE_ROOT; };
+		225BD9BF14F27E1A00F277AE /* KSWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSWriter.m; sourceTree = SOURCE_ROOT; };
+		225BD9D414F27E8000F277AE /* Compound Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Compound Tests.plist"; sourceTree = "<group>"; };
+		225BD9D614F27E8000F277AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		225BD9D714F27E8000F277AE /* KSWriterTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSWriterTestCase.h; sourceTree = "<group>"; };
+		225BD9D814F27E8000F277AE /* KSWriterTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSWriterTestCase.m; sourceTree = "<group>"; };
+		225BD9D914F27E8000F277AE /* KSWriterTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "KSWriterTests-Info.plist"; sourceTree = "<group>"; };
+		225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMutableDataWriterTests.m; sourceTree = "<group>"; };
+		225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOutputStreamWriterTests.m; sourceTree = "<group>"; };
+		225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSStringWriterTests.m; sourceTree = "<group>"; };
+		2291487B14CD7A0A00EFB4AB /* TESTS README.mdown */ = {isa = PBXFileReference; lastKnownFileType = text; name = "TESTS README.mdown"; path = "Tests/TESTS README.mdown"; sourceTree = "<group>"; };
+		22C18C0114D3001700AE57DA /* ocunit2junit.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = ocunit2junit.rb; sourceTree = "<group>"; };
+		22C18C0314D3001700AE57DA /* test.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test.sh; sourceTree = "<group>"; };
+		22C1948714C709A1009A4406 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22352B8D14C6FCB00031F5DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22352B9414C6FCB00031F5DD /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22352BA014C6FCB00031F5DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22352BA614C6FCB00031F5DD /* SenTestingKit.framework in Frameworks */,
+				22352BA714C6FCB00031F5DD /* Cocoa.framework in Frameworks */,
+				22352BAA14C6FCB00031F5DD /* libKSWriter.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22352B8514C6FCAF0031F5DD = {
+			isa = PBXGroup;
+			children = (
+				22352B9914C6FCB00031F5DD /* KSWriter */,
+				228C7D2314CD76F200CC42FE /* Tests */,
+				22352B9214C6FCB00031F5DD /* Frameworks */,
+				22352B9114C6FCB00031F5DD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22352B9114C6FCB00031F5DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22352B9014C6FCB00031F5DD /* libKSWriter.a */,
+				22352BA414C6FCB00031F5DD /* KSWriterTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22352B9214C6FCB00031F5DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22C1948714C709A1009A4406 /* WebKit.framework */,
+				22352B9314C6FCB00031F5DD /* Cocoa.framework */,
+				22352BA514C6FCB00031F5DD /* SenTestingKit.framework */,
+				22352B9514C6FCB00031F5DD /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22352B9514C6FCB00031F5DD /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22352B9614C6FCB00031F5DD /* AppKit.framework */,
+				22352B9714C6FCB00031F5DD /* CoreData.framework */,
+				22352B9814C6FCB00031F5DD /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		22352B9914C6FCB00031F5DD /* KSWriter */ = {
+			isa = PBXGroup;
+			children = (
+				225BD9B414F27E1A00F277AE /* KSBufferedWriter.h */,
+				225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */,
+				225BD9B614F27E1A00F277AE /* KSForwardingWriter.h */,
+				225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */,
+				225BD9B814F27E1A00F277AE /* KSMutableDataWriter.h */,
+				225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */,
+				225BD9BA14F27E1A00F277AE /* KSOutputStreamWriter.h */,
+				225BD9BB14F27E1A00F277AE /* KSOutputStreamWriter.m */,
+				225BD9BC14F27E1A00F277AE /* KSStringWriter.h */,
+				225BD9BD14F27E1A00F277AE /* KSStringWriter.m */,
+				225BD9BE14F27E1A00F277AE /* KSWriter.h */,
+				225BD9BF14F27E1A00F277AE /* KSWriter.m */,
+			);
+			name = KSWriter;
+			path = KSHTMLWriter;
+			sourceTree = "<group>";
+		};
+		225BD9D314F27E8000F277AE /* KSWriterTests */ = {
+			isa = PBXGroup;
+			children = (
+				225BD9D414F27E8000F277AE /* Compound Tests.plist */,
+				225BD9D514F27E8000F277AE /* InfoPlist.strings */,
+				225BD9D714F27E8000F277AE /* KSWriterTestCase.h */,
+				225BD9D814F27E8000F277AE /* KSWriterTestCase.m */,
+				225BD9D914F27E8000F277AE /* KSWriterTests-Info.plist */,
+				225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */,
+				225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */,
+				225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */,
+			);
+			name = KSWriterTests;
+			path = Tests/KSWriterTests;
+			sourceTree = "<group>";
+		};
+		228C7D2314CD76F200CC42FE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2291487B14CD7A0A00EFB4AB /* TESTS README.mdown */,
+				225BD9D314F27E8000F277AE /* KSWriterTests */,
+				22C18C0014D3001700AE57DA /* Scripts */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		22C18C0014D3001700AE57DA /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				22C18C0114D3001700AE57DA /* ocunit2junit.rb */,
+				22C18C0314D3001700AE57DA /* test.sh */,
+			);
+			name = Scripts;
+			path = Tests/Scripts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		22352B8E14C6FCB00031F5DD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225BD9C014F27E1B00F277AE /* KSBufferedWriter.h in Headers */,
+				225BD9C314F27E1B00F277AE /* KSForwardingWriter.h in Headers */,
+				225BD9C614F27E1B00F277AE /* KSMutableDataWriter.h in Headers */,
+				225BD9C914F27E1B00F277AE /* KSOutputStreamWriter.h in Headers */,
+				225BD9CC14F27E1B00F277AE /* KSStringWriter.h in Headers */,
+				225BD9CF14F27E1B00F277AE /* KSWriter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		22352B8F14C6FCB00031F5DD /* KSWriter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22352BB614C6FCB00031F5DD /* Build configuration list for PBXNativeTarget "KSWriter" */;
+			buildPhases = (
+				22352B8C14C6FCB00031F5DD /* Sources */,
+				22352B8D14C6FCB00031F5DD /* Frameworks */,
+				22352B8E14C6FCB00031F5DD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KSWriter;
+			productName = KSHTMLWriter;
+			productReference = 22352B9014C6FCB00031F5DD /* libKSWriter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		22352BA314C6FCB00031F5DD /* KSWriterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22352BB914C6FCB00031F5DD /* Build configuration list for PBXNativeTarget "KSWriterTests" */;
+			buildPhases = (
+				22352B9F14C6FCB00031F5DD /* Sources */,
+				22352BA014C6FCB00031F5DD /* Frameworks */,
+				22352BA114C6FCB00031F5DD /* Resources */,
+				22352BA214C6FCB00031F5DD /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22352BA914C6FCB00031F5DD /* PBXTargetDependency */,
+			);
+			name = KSWriterTests;
+			productName = KSHTMLWriterTests;
+			productReference = 22352BA414C6FCB00031F5DD /* KSWriterTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22352B8714C6FCAF0031F5DD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Karelia Software";
+			};
+			buildConfigurationList = 22352B8A14C6FCAF0031F5DD /* Build configuration list for PBXProject "KSWriter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 22352B8514C6FCAF0031F5DD;
+			productRefGroup = 22352B9114C6FCB00031F5DD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22352B8F14C6FCB00031F5DD /* KSWriter */,
+				22352BA314C6FCB00031F5DD /* KSWriterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22352BA114C6FCB00031F5DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225BD9DF14F27E8000F277AE /* Compound Tests.plist in Resources */,
+				225BD9E014F27E8000F277AE /* InfoPlist.strings in Resources */,
+				225BD9E214F27E8000F277AE /* KSWriterTests-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		22352BA214C6FCB00031F5DD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22352B8C14C6FCB00031F5DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225BD9C114F27E1B00F277AE /* KSBufferedWriter.m in Sources */,
+				225BD9C414F27E1B00F277AE /* KSForwardingWriter.m in Sources */,
+				225BD9C714F27E1B00F277AE /* KSMutableDataWriter.m in Sources */,
+				225BD9CA14F27E1B00F277AE /* KSOutputStreamWriter.m in Sources */,
+				225BD9CD14F27E1B00F277AE /* KSStringWriter.m in Sources */,
+				225BD9D014F27E1B00F277AE /* KSWriter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22352B9F14C6FCB00031F5DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225BD9C214F27E1B00F277AE /* KSBufferedWriter.m in Sources */,
+				225BD9C514F27E1B00F277AE /* KSForwardingWriter.m in Sources */,
+				225BD9C814F27E1B00F277AE /* KSMutableDataWriter.m in Sources */,
+				225BD9CB14F27E1B00F277AE /* KSOutputStreamWriter.m in Sources */,
+				225BD9CE14F27E1B00F277AE /* KSStringWriter.m in Sources */,
+				225BD9D114F27E1B00F277AE /* KSWriter.m in Sources */,
+				225BD9E114F27E8000F277AE /* KSWriterTestCase.m in Sources */,
+				225BD9E314F27E8000F277AE /* KSMutableDataWriterTests.m in Sources */,
+				225BD9E414F27E8000F277AE /* KSOutputStreamWriterTests.m in Sources */,
+				225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22352BA914C6FCB00031F5DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22352B8F14C6FCB00031F5DD /* KSWriter */;
+			targetProxy = 22352BA814C6FCB00031F5DD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		225BD9D514F27E8000F277AE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				225BD9D614F27E8000F277AE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22352BB414C6FCB00031F5DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		22352BB514C6FCB00031F5DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		22352BB714C6FCB00031F5DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		22352BB814C6FCB00031F5DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		22352BBA14C6FCB00031F5DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				INFOPLIST_FILE = "Tests/KSWriterTests/KSWriterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		22352BBB14C6FCB00031F5DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				INFOPLIST_FILE = "Tests/KSWriterTests/KSWriterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22352B8A14C6FCAF0031F5DD /* Build configuration list for PBXProject "KSWriter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22352BB414C6FCB00031F5DD /* Debug */,
+				22352BB514C6FCB00031F5DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22352BB614C6FCB00031F5DD /* Build configuration list for PBXNativeTarget "KSWriter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22352BB714C6FCB00031F5DD /* Debug */,
+				22352BB814C6FCB00031F5DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22352BB914C6FCB00031F5DD /* Build configuration list for PBXNativeTarget "KSWriterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22352BBA14C6FCB00031F5DD /* Debug */,
+				22352BBB14C6FCB00031F5DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22352B8714C6FCAF0031F5DD /* Project object */;
+}
