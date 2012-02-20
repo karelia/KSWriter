@@ -76,7 +76,7 @@
 		225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMutableDataWriterTests.m; sourceTree = "<group>"; };
 		225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOutputStreamWriterTests.m; sourceTree = "<group>"; };
 		225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSStringWriterTests.m; sourceTree = "<group>"; };
-		2291487B14CD7A0A00EFB4AB /* TESTS README.mdown */ = {isa = PBXFileReference; lastKnownFileType = text; name = "TESTS README.mdown"; path = "Tests/TESTS README.mdown"; sourceTree = "<group>"; };
+		2291487B14CD7A0A00EFB4AB /* README.mdown */ = {isa = PBXFileReference; name = README.mdown; path = Tests/README.mdown; sourceTree = "<group>"; };
 		22C18C0114D3001700AE57DA /* ocunit2junit.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = ocunit2junit.rb; sourceTree = "<group>"; };
 		22C18C0314D3001700AE57DA /* test.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test.sh; sourceTree = "<group>"; };
 		22C1948714C709A1009A4406 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -183,7 +183,7 @@
 		228C7D2314CD76F200CC42FE /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				2291487B14CD7A0A00EFB4AB /* TESTS README.mdown */,
+				2291487B14CD7A0A00EFB4AB /* README.mdown */,
 				225BD9D314F27E8000F277AE /* KSWriterTests */,
 				22C18C0014D3001700AE57DA /* Scripts */,
 			);
