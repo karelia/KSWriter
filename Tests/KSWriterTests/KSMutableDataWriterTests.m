@@ -9,9 +9,9 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 #import "KSMutableDataWriter.h"
-#import "KSWriterTestCase.h"
+#import "ECTestCase.h"
 
-@interface KSMutableDataWriterTests : KSWriterTestCase
+@interface KSMutableDataWriterTests : ECTestCase
 
 
 @end

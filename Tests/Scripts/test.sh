@@ -1,11 +1,8 @@
-echo Testing Mac
+echo Testing KSWriter
 
 base=`dirname $0`
-config="-configuration Debug"
-sdkMac="macosx"
-options="clean build TEST_AFTER_BUILD=YES"
-
-CONVERT_OUTPUT="$base/ocunit2junit.rb"
+common="$base/../ECUnitTests/Scripts"
+source "$common/test-common.sh"
 
 # build & run the tests
-xcodebuild -target "KSWriterTests" $config -sdk "$sdkMac" $options | "$CONVERT_OUTPUT"
+xcodebuild -target "KSWriterTests" -configuration $testConfig -sdk "$testSDKMac" $testOptions | "$common/$testConvertOutput"
