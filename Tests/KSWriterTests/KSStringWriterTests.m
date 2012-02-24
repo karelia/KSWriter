@@ -9,9 +9,9 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 #import "KSStringWriter.h"
-#import "KSWriterTestCase.h"
+#import "ECTestCase.h"
 
-@interface KSStringWriterTests : KSWriterTestCase
+@interface KSStringWriterTests : ECTestCase
 
 
 @end

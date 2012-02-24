@@ -9,7 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 #import "KSOutputStreamWriter.h"
-#import "KSWriterTestCase.h"
+#import "ECTestCase.h"
 
 @interface MockStream : NSOutputStream
 
@@ -38,7 +38,7 @@
 @end
 
 
-@interface KSOutputStreamWriterTests : KSWriterTestCase
+@interface KSOutputStreamWriterTests : ECTestCase
 
 
 @end
