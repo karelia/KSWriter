@@ -167,6 +167,7 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
 // Can be called multiple times to set up a stack of buffers.
 - (void)beginBuffering;
 {
+    [self cancelFlushOnNextWrite];
     [_bufferPoints insertPointer:(void *)[self insertionPoint] atIndex:0];
 }
 
