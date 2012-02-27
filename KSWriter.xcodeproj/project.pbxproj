@@ -35,7 +35,7 @@
 		225BD9E314F27E8000F277AE /* KSMutableDataWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */; };
 		225BD9E414F27E8000F277AE /* KSOutputStreamWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */; };
 		225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
-		22A151C814F7C6FA0082C399 /* ECDynamicTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A151BF14F7C6FA0082C399 /* ECDynamicTestCase.m */; };
+		22740B1714FC2FE200AD6B33 /* ECParameterisedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22740B1614FC2FE200AD6B33 /* ECParameterisedTestCase.m */; };
 		22A151C914F7C6FA0082C399 /* ECTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A151C114F7C6FA0082C399 /* ECTestCase.m */; };
 /* End PBXBuildFile section */
 
@@ -75,12 +75,12 @@
 		225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMutableDataWriterTests.m; sourceTree = "<group>"; };
 		225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOutputStreamWriterTests.m; sourceTree = "<group>"; };
 		225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSStringWriterTests.m; sourceTree = "<group>"; };
+		22740B1514FC2FE200AD6B33 /* ECParameterisedTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECParameterisedTestCase.h; sourceTree = "<group>"; };
+		22740B1614FC2FE200AD6B33 /* ECParameterisedTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECParameterisedTestCase.m; sourceTree = "<group>"; };
 		2291487B14CD7A0A00EFB4AB /* README.mdown */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.mdown; path = Tests/README.mdown; sourceTree = "<group>"; };
-		22A151BE14F7C6FA0082C399 /* ECDynamicTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECDynamicTestCase.h; sourceTree = "<group>"; };
-		22A151BF14F7C6FA0082C399 /* ECDynamicTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDynamicTestCase.m; sourceTree = "<group>"; };
 		22A151C014F7C6FA0082C399 /* ECTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTestCase.h; sourceTree = "<group>"; };
 		22A151C114F7C6FA0082C399 /* ECTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTestCase.m; sourceTree = "<group>"; };
-		22A151C214F7C6FA0082C399 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		22A151C214F7C6FA0082C399 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		22A151C414F7C6FA0082C399 /* Test.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Test.bundle; sourceTree = "<group>"; };
 		22A151C614F7C6FA0082C399 /* ocunit2junit.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ocunit2junit.rb; sourceTree = "<group>"; };
 		22A151C714F7C6FA0082C399 /* test-common.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "test-common.sh"; sourceTree = "<group>"; };
@@ -198,8 +198,8 @@
 		22A151BC14F7C6FA0082C399 /* ECUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				22A151C214F7C6FA0082C399 /* README.md */,
 				22A151BD14F7C6FA0082C399 /* Generic */,
-				22A151C214F7C6FA0082C399 /* README */,
 				22A151C314F7C6FA0082C399 /* Resources */,
 				22A151C514F7C6FA0082C399 /* Scripts */,
 			);
@@ -210,8 +210,8 @@
 		22A151BD14F7C6FA0082C399 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
-				22A151BE14F7C6FA0082C399 /* ECDynamicTestCase.h */,
-				22A151BF14F7C6FA0082C399 /* ECDynamicTestCase.m */,
+				22740B1514FC2FE200AD6B33 /* ECParameterisedTestCase.h */,
+				22740B1614FC2FE200AD6B33 /* ECParameterisedTestCase.m */,
 				22A151C014F7C6FA0082C399 /* ECTestCase.h */,
 				22A151C114F7C6FA0082C399 /* ECTestCase.m */,
 			);
@@ -383,8 +383,8 @@
 				225BD9E314F27E8000F277AE /* KSMutableDataWriterTests.m in Sources */,
 				225BD9E414F27E8000F277AE /* KSOutputStreamWriterTests.m in Sources */,
 				225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */,
-				22A151C814F7C6FA0082C399 /* ECDynamicTestCase.m in Sources */,
 				22A151C914F7C6FA0082C399 /* ECTestCase.m in Sources */,
+				22740B1714FC2FE200AD6B33 /* ECParameterisedTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
