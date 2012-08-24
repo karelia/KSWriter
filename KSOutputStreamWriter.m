@@ -77,6 +77,8 @@
 
 - (void)writeString:(NSString *)string;
 {
+    if (!_outputStream) return;
+    
     // Precompose if requested
     if (_precompose)
     {
