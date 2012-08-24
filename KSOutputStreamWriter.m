@@ -40,6 +40,8 @@
 
 - (void)writePreprocessedString:(NSString *)string;
 {
+    CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding([self encoding]);
+    
 #define BUFFER_LENGTH 1024
     UInt8 buffer[BUFFER_LENGTH];
     
@@ -50,7 +52,7 @@
         CFIndex length;
         CFIndex chars = CFStringGetBytes((CFStringRef)string,
                                          range,
-                                         CFStringConvertNSStringEncodingToEncoding([self encoding]),
+                                         encoding,
                                          0,
                                          YES,
                                          buffer,
