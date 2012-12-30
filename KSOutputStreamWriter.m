@@ -59,7 +59,6 @@
                                          BUFFER_LENGTH,
                                          &length);
         
-        
         NSInteger written = [_outputStream write:buffer maxLength:length];
         
         while (written < length)
@@ -70,6 +69,9 @@
                 written = [_outputStream write:&buffer[written] maxLength:length];
             }
         }
+        
+        // For characters outside the supported range, do a poor impression of -[NSString dataUsingEncoding:lossy:] and skip them
+        if (chars == 0) chars = 1;
         
         range = CFRangeMake(range.location + chars, range.length - chars);
     }
