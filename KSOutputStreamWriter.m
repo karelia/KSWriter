@@ -54,10 +54,12 @@
                                          range,
                                          encoding,
                                          0,
-                                         true,
+                                         !_started, // only want a BOM or similar for the very first write
                                          buffer,
                                          BUFFER_LENGTH,
                                          &length);
+        
+        _started = YES;
         
         NSInteger written = [_outputStream write:buffer maxLength:length];
         
