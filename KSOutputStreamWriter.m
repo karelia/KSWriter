@@ -54,7 +54,7 @@
                                          range,
                                          encoding,
                                          0,
-                                         YES,
+                                         true,
                                          buffer,
                                          BUFFER_LENGTH,
                                          &length);

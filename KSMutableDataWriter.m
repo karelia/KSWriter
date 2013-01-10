@@ -34,7 +34,7 @@
                                      range,
                                      encoding,
                                      0,
-                                     NO,
+                                     false,
                                      NULL,
                                      0,
                                      &usedBufLen);
@@ -47,7 +47,7 @@
                              range,
                              encoding,
                              0,
-                             NO,
+                             false,
                              buffer + [_data length] - usedBufLen,
                              usedBufLen,
                              NULL);
