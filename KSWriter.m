@@ -135,7 +135,10 @@
 
 + (instancetype)writerWithOutputWriter:(id <KSWriter>)output;
 {
-    return [self writerWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) {
+	NSStringEncoding encoding = NSUTF16StringEncoding;
+	if ([output respondsToSelector:@selector(encoding)]) encoding = [(KSWriter *)output encoding];
+	
+    return [self writerWithEncoding:encoding block:^(NSString *string, NSRange range) {
 		[output writeString:string range:range];
 	}];
 }

@@ -71,6 +71,7 @@
 
 
 #pragma mark Forwarding Onto Another Writer
+// If the output writer has an encoding, the returned writer matches it
 + (instancetype)writerWithOutputWriter:(id <KSWriter>)output;
 
 
