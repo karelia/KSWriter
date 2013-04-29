@@ -26,6 +26,8 @@
     _block(string);
 }
 
+- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
+
 - (void)close;
 {
     [_block release]; _block = nil;

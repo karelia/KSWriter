@@ -28,7 +28,12 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol KSWriter <NSObject>
+@protocol KSStringAppending <NSObject>
+- (void)appendString:(NSString *)aString;
+@end
+
+
+@protocol KSWriter <KSStringAppending>
 - (void)writeString:(NSString *)string;
 - (void)close;  // most writers will ignore, but others may use it to trigger an action
 @end
@@ -49,5 +54,8 @@
 @end
 
 
-@interface NSMutableString (KSWriter) <KSWriter>
+#pragma mark -
+
+
+@interface NSMutableString (KSWriter) <KSStringAppending>
 @end

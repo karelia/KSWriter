@@ -68,4 +68,6 @@
     [_writer writeString:string];
 }
 
+- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
+
 @end

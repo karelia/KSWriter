@@ -54,6 +54,8 @@
     NSAssert(chars == [string length], @"Unexpected number of characters converted");
 }
 
+- (void)appendString:(NSString *)aString; { return [self writeString:aString]; }
+
 - (void)close;
 {
     [_data release];

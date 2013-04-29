@@ -104,6 +104,8 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
     [_bufferPoints replacePointerAtIndex:0 withPointer:(void *)insertionPoint];
 }
 
+- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
+
 - (void)close;
 {
     // Prune the buffer back down to size

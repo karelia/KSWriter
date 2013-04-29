@@ -97,6 +97,8 @@
     }
 }
 
+- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
+
 - (void)close;
 {
     [_outputStream release]; _outputStream = nil;
