@@ -40,25 +40,18 @@
 @end
 
 
-@protocol KSBufferingWriter <KSWriter>
-- (void)startBuffering; // can be called multiple times, implementor chooses how to handle that
-- (void)flush;          // writes all buffered content
-- (void)writeString:(NSString *)string bypassBuffer:(BOOL)bypassBuffer;
-@end
-
-
-@protocol KSMultiBufferingWriter <KSBufferingWriter>
-- (void)startBuffering;     // each call is expected to start a new distinct buffer, while maintaining the old
-- (void)flushFirstBuffer;   // thus you can stagger beginning and ending buffers
-- (NSUInteger)numberOfBuffers;
-- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
+@protocol KSMultiBufferingWriter <KSWriter>
 @end
 
 
 #pragma mark -
 
 
-@interface KSWriter : NSObject <KSWriter>
+@interface KSWriter : NSObject <KSMultiBufferingWriter>
+
+#pragma mark Building up Strings
+- (id)init;	// strings are buffered in-memory, to be retrieved by -string
+
 
 #pragma mark Encoding as Data
 
@@ -85,7 +78,40 @@
 @property(nonatomic, readonly) NSStringEncoding encoding;	// defaults to UTF-16 for non-data-based writers
 
 
+#pragma mark Output
+
+// If the receiver was configured to pipe through to some output, returns nil
+// Otherwise, a string comprised of all the non-buffered strings written so far
+- (NSString *)string;
+
+
+#pragma mark Buffering
+
+- (void)removeAllCharacters;    // reset, but cunningly keeps memory allocated for speed
+- (void)close;                  // no effect on output/state, but frees any unused memory
+- (void)discardString;          // leaves only buffered content
+
+- (void)beginBuffer; // can be called multiple times to set up a stack of buffers.
+- (void)discardBuffer;  // discards the last buffer
+- (NSUInteger)numberOfBuffers;
+
+// Pass 0 to write directly to the output, or first buffer if there is no output
+- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;
+
+- (void)flush;          // flushes all buffers
+- (void)flushFirstBuffer;   // flushes only the first buffer, leaving any others intact
+
+
+#pragma mark Flush-on-write
+
+- (void)flushOnNextWrite;   // calls -flush at next write. Can still use -discardBuffer to effectively cancel this
+- (void)cancelFlushOnNextWrite;
+
+
 @end
+
+
+extern NSString *KSWriterWillFlushNotification;
 
 
 #pragma mark -

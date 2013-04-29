@@ -31,6 +31,9 @@
 @implementation KSWriter
 {
     void    (^_block)(NSString *, NSRange);
+    NSMutableString *_buffer;
+    NSPointerArray  *_bufferPoints; // stored in reverse order for efficiency
+    BOOL            _flushOnNextWrite;
 }
 
 #pragma mark Encoding as Data
@@ -147,17 +150,20 @@
 
 + (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
 {
-	return [[[self alloc] initWithEncoding:encoding block:block] autorelease];
+	NSParameterAssert(block);
+    return [[[self alloc] initWithEncoding:encoding block:block] autorelease];
 }
 
 - (id)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
 {
-    NSParameterAssert(block);
-    
     if (self = [super init])
     {
         _block = [block copy];
 		_encoding = encoding;
+		
+        _buffer = [[NSMutableString alloc] init];
+        
+        _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
     }
     return self;
 }
@@ -166,19 +172,32 @@
 
 - (id)init;
 {
-	// Create empty block rather than have -writeString:… keep checking if it's nil
-    return [self initWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) { }];
+	self = [self initWithEncoding:NSUTF16StringEncoding block:nil];
+	[self beginBuffer];
+	return self;
 }
 
 - (void)close;
 {
     [_block release]; _block = nil;
+	
+	// Prune the buffer back down to size
+    NSUInteger length = [self length];
+    NSUInteger bufferLength = [_buffer length];
+    if (bufferLength > length)
+    {
+        NSRange range = NSMakeRange(length, bufferLength - length);
+        [_buffer deleteCharactersInRange:range];
+    }
 }
 
 - (void)dealloc
 {
     [self close];
     NSAssert(!_block, @"-close failed to dispose of writer block");
+    
+    [_buffer release];
+    [_bufferPoints release];
     
     [super dealloc];
 }
@@ -190,18 +209,202 @@
 	return [self writeString:string range:NSMakeRange(0, string.length)];
 }
 
-- (void)writeString:(NSString *)string range:(NSRange)range;
+- (void)writeString:(NSString *)string range:(NSRange)nsrange;
 {
-    _block(string, range);
+    // Flush if needed
+    NSUInteger length = nsrange.length;
+    if (_flushOnNextWrite && length)
+    {
+        [self flush];
+    }
+    
+	
+	// Write through to output, or append to buffer
+    if (self.numberOfBuffers)
+	{
+		// Replace existing characters where possible
+		NSUInteger insertionPoint = [self insertionPoint];
+		NSUInteger unusedCapacity = [_buffer length] - insertionPoint;
+		
+		NSRange range = NSMakeRange(insertionPoint, MIN(length, unusedCapacity));
+		[_buffer replaceCharactersInRange:range withString:[string substringWithRange:nsrange]];
+		
+		insertionPoint = (insertionPoint + length);
+		[_bufferPoints replacePointerAtIndex:0 withPointer:(void *)insertionPoint];
+	}
+	else
+	{
+		_block(string, nsrange);
+	}
 }
 
-- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
+- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
+{
+    NSUInteger invertedIndex = [_bufferPoints count] - 1 - index;
+    NSUInteger insertionPoint = (NSUInteger)[_bufferPoints pointerAtIndex:invertedIndex];
+    
+    
+    NSParameterAssert(insertionPoint <= [self insertionPoint]);
+    [_buffer insertString:string atIndex:insertionPoint];
+    
+    NSUInteger i, count = invertedIndex + 1;
+    for (i = 0; i < count; i++)
+    {
+        NSUInteger ind = (NSUInteger)[_bufferPoints pointerAtIndex:i];
+        ind += [string length];
+        [_bufferPoints replacePointerAtIndex:i withPointer:(void *)ind];
+    }
+}
+
+- (void)writeString:(NSString *)string bypassBuffer:(BOOL)bypassBuffer;
+{
+    if (bypassBuffer)
+    {
+        [self writeString:string toBufferAtIndex:0];
+    }
+    else
+    {
+        [self writeString:string];
+    }
+}
 
 #pragma mark Properties
 
 @synthesize encoding = _encoding;
 
+#pragma mark NSString Primitives
+// Not really used on the whole, but theoretically this class could be an NSString subclass
+
+- (NSUInteger)length;
+{
+	if (!_bufferPoints.count) return 0;
+    return (NSUInteger)[_bufferPoints pointerAtIndex:([_bufferPoints count] - 1)];
+}
+
+- (unichar)characterAtIndex:(NSUInteger)index;
+{
+    NSParameterAssert(index < [self length]);
+    return [_buffer characterAtIndex:index];
+}
+
+- (void)getCharacters:(unichar *)buffer range:(NSRange)aRange;
+{
+    NSParameterAssert(NSMaxRange(aRange) <= [self length]);
+    return [_buffer getCharacters:buffer range:aRange];
+}
+
+#pragma mark Output
+
+- (NSString *)string;
+{
+    return [_buffer substringToIndex:[self length]];
+}
+
+#pragma mark Buffering
+
+- (NSUInteger)insertionPoint;
+{
+	if (!_bufferPoints.count) return 0;
+	return (NSUInteger)[_bufferPoints pointerAtIndex:0];
+}
+
+#ifdef DEBUG
+- (NSArray *)bufferPoints;
+{
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[_bufferPoints count]];
+    
+    NSUInteger i, count = [_bufferPoints count];
+    for (i = 0; i < count; i++)
+    {
+        NSUInteger anIndex = (NSUInteger)[_bufferPoints pointerAtIndex:i];
+        [result addObject:[NSNumber numberWithUnsignedInteger:anIndex]];
+    }
+    
+    return result;
+}
+#endif
+
+- (void)removeAllCharacters;
+{
+    [_bufferPoints release]; _bufferPoints = [[NSPointerArray alloc]
+                                              initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
+    [_bufferPoints addPointer:0];
+}
+
+- (void)discardString;          // leaves only buffered content
+{
+    NSUInteger length = [self length];
+    [_buffer deleteCharactersInRange:NSMakeRange(0, length)];
+    
+    NSUInteger i, count = [_bufferPoints count];
+    for (i = 0; i < count; i++)
+    {
+        [_bufferPoints replacePointerAtIndex:i
+                                 withPointer:(void *)((NSUInteger)[_bufferPoints pointerAtIndex:i] - length)];
+    }
+}
+
+// Can be called multiple times to set up a stack of buffers.
+- (void)beginBuffer;
+{
+    [self cancelFlushOnNextWrite];
+    [_bufferPoints insertPointer:(void *)[self insertionPoint] atIndex:0];
+}
+
+- (NSUInteger)numberOfBuffers;
+{
+    return _bufferPoints.count;
+}
+
+- (void)flushFirstBuffer;
+{
+    [_bufferPoints removePointerAtIndex:([_bufferPoints count] - 1)];
+}
+
+// Discards the most recent buffer. If there's a lower one in the stack, that is restored
+- (void)discardBuffer;
+{
+    NSParameterAssert([_bufferPoints count] > 1);
+    [_bufferPoints removePointerAtIndex:0];
+}
+
+- (void)flush;
+{
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:KSWriterWillFlushNotification
+     object:self];
+    
+    // Ditch all buffer points except the one currently marking -insertionPoint
+    for (NSUInteger i = [_bufferPoints count]-1; i > 0; i--)
+    {
+        [_bufferPoints removePointerAtIndex:i];
+    }
+    _flushOnNextWrite = NO;
+}
+
+#pragma mark Flush-on-write
+
+- (void)flushOnNextWrite; { _flushOnNextWrite = YES; }
+
+- (void)cancelFlushOnNextWrite; { _flushOnNextWrite = NO; }
+
+#pragma mark KSStringAppending
+
+- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
+
+#pragma mark Debug
+
+- (NSString *)debugDescription;
+{
+    NSString *result = [self description];
+    result = [result stringByAppendingFormat:@" %@", [_buffer substringToIndex:[self insertionPoint]]];
+    return result;
+}
+
 @end
+
+
+NSString *KSWriterWillFlushNotification = @"KSWriterWillFlush";
 
 
 #pragma mark -

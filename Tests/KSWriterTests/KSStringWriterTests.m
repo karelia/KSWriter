@@ -8,7 +8,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-#import "KSStringWriter.h"
+#import "KSWriter.h"
 #import "ECTestCase.h"
 
 @interface KSStringWriterTests : ECTestCase
@@ -20,14 +20,14 @@
 
 - (void)testInitiallyEmpty
 {
-    KSStringWriter* output = [[KSStringWriter alloc] init];
+    KSWriter* output = [[KSWriter alloc] init];
     STAssertTrue([[output string] isEqualToString:@""], @"starts off with empty string");
     [output release];
 }
 
 - (void)testWriting
 {
-    KSStringWriter* output = [[KSStringWriter alloc] init];
+    KSWriter* output = [[KSWriter alloc] init];
     [output writeString:@"test"];
     STAssertTrue([[output string] isEqualToString:@"test"], @"string is correct");
 
@@ -39,7 +39,7 @@
 
 - (void)testClearing
 {
-    KSStringWriter* output = [[KSStringWriter alloc] init];
+    KSWriter* output = [[KSWriter alloc] init];
     [output writeString:@"test"];
     STAssertTrue([[output string] isEqualToString:@"test"], @"string is correct");
     
