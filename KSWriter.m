@@ -46,7 +46,7 @@
 {
     NSParameterAssert(block);
     
-    if (self = [self init])
+    if (self = [super init])
     {
         _block = [block copy];
     }
