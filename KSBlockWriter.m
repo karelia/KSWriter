@@ -10,7 +10,7 @@
 
 @implementation KSBlockWriter
 
-- (id)initWithBlock:(void (^)(NSString *string))block;
+- (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
 {
     NSParameterAssert(block);
     
@@ -28,7 +28,7 @@
 
 - (void)writeString:(NSString *)string range:(NSRange)nsrange;
 {
-    _block([string substringWithRange:nsrange]);
+    _block(string, nsrange);
 }
 
 - (void)appendString:(NSString *)aString; { [self writeString:aString]; }

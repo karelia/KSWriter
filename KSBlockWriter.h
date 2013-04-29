@@ -12,10 +12,10 @@
 @interface KSBlockWriter : NSObject <KSWriter>
 {
   @private
-    void    (^_block)(NSString *);
+    void    (^_block)(NSString *, NSRange);
 }
 
 // The block is called for each string to be written
-- (id)initWithBlock:(void (^)(NSString *string))block;
+- (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
 
 @end
