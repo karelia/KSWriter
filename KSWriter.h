@@ -33,21 +33,10 @@
 @end
 
 
-@protocol KSWriter <KSStringAppending>
-- (void)writeString:(NSString *)string range:(NSRange)range;	// primitive
-- (void)writeString:(NSString *)string;							// convenience
-- (void)close;  // most writers will ignore, but others may use it to trigger an action
-@end
-
-
-@protocol KSMultiBufferingWriter <KSWriter>
-@end
-
-
 #pragma mark -
 
 
-@interface KSWriter : NSObject <KSMultiBufferingWriter>
+@interface KSWriter : NSObject <KSStringAppending>
 
 #pragma mark Building up Strings
 
@@ -70,13 +59,18 @@
 
 #pragma mark Forwarding Onto Another Writer
 // If the output writer has an encoding, the returned writer matches it
-+ (instancetype)writerWithOutputWriter:(id <KSWriter>)output;
++ (instancetype)writerWithOutputWriter:(KSWriter *)output;
 
 
 #pragma mark Custom Writing
 // The block is called for each string to be written
 // If the block isn't explicitly encoding data and you've nothing better to choose, go for NSUTF16StringEncoding
 + (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(2)));
+
+
+#pragma mark Writing
+- (void)writeString:(NSString *)string range:(NSRange)range;	// primitive
+- (void)writeString:(NSString *)string;							// convenience
 
 
 #pragma mark Properties
@@ -105,9 +99,12 @@
 
 
 #pragma mark Flush-on-write
-
 - (void)flushOnNextWrite;   // calls -flush at next write. Can still use -discardBuffer to effectively cancel this
 - (void)cancelFlushOnNextWrite;
+
+
+#pragma mark Lifecycle
+- (void)close;  // clears any buffers and stops writing to output
 
 
 @end

@@ -153,12 +153,9 @@
 
 #pragma mark Forwarding Onto Another Writer
 
-+ (instancetype)writerWithOutputWriter:(id <KSWriter>)output;
++ (instancetype)writerWithOutputWriter:(KSWriter *)output;
 {
-	NSStringEncoding encoding = NSUTF16StringEncoding;
-	if ([output respondsToSelector:@selector(encoding)]) encoding = [(KSWriter *)output encoding];
-	
-    return [self writerWithEncoding:encoding block:^(NSString *string, NSRange range) {
+	return [self writerWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
 		[output writeString:string range:range];
 	}];
 }
