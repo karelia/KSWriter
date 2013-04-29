@@ -36,6 +36,23 @@
     BOOL            _flushOnNextWrite;
 }
 
+#pragma mark Building up Strings
+
+- (id)init;
+{
+	self = [self initWithEncoding:NSUTF16StringEncoding block:nil];
+	[self beginBuffer];
+	return self;
+}
+
++ (instancetype)writerWithMutableString:(NSMutableString *)output;
+{
+	return [self writerWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) {
+
+		[output appendString:[string substringWithRange:range]];
+	}];
+}
+
 #pragma mark Encoding as Data
 
 + (instancetype)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)nsencoding;
@@ -169,13 +186,6 @@
 }
 
 #pragma mark Lifecycle
-
-- (id)init;
-{
-	self = [self initWithEncoding:NSUTF16StringEncoding block:nil];
-	[self beginBuffer];
-	return self;
-}
 
 - (void)close;
 {

@@ -50,7 +50,12 @@
 @interface KSWriter : NSObject <KSMultiBufferingWriter>
 
 #pragma mark Building up Strings
+
 - (id)init;	// strings are buffered in-memory, to be retrieved by -string
+
+// This can be one of the least efficient types of writer since it might have to create lots of temporary substrings for appending to the mutable string
+// Reports encoding of UTF-16
++ (instancetype)writerWithMutableString:(NSMutableString *)string __attribute((nonnull(1)));
 
 
 #pragma mark Encoding as Data
