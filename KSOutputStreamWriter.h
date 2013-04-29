@@ -25,8 +25,6 @@
                   encoding:(NSStringEncoding)encoding
          precomposeStrings:(BOOL)precompose;
 
-- (id)initWithOutputStream:(NSOutputStream *)outputStream;  // uses UTF8 encoding, but doesn't precompose
-
 @property(nonatomic, readonly) NSStringEncoding encoding;
 
 @end

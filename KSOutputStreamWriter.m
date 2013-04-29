@@ -25,11 +25,6 @@
     return self;
 }
 
-- (id)initWithOutputStream:(NSOutputStream *)outputStream;  // uses UTF8 encoding
-{
-    return [self initWithOutputStream:outputStream encoding:NSUTF8StringEncoding precomposeStrings:NO];
-}
-
 - (void)dealloc;
 {
     [self close];   // release stream
