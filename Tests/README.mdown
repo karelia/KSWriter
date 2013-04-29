@@ -1,0 +1,9 @@
+The KSWriterTests target consists of a few unit tests for KSWriter
+
+To run these, select the KSWriter scheme in Xcode, and choose "Test" from the "Product" menu.
+
+The tests exercise the following classes:
+
+- KSStringWriter
+- KSMutableDataWriter
+- KSOutputStreamWriter
