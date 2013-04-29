@@ -168,16 +168,23 @@
     return [[[self alloc] initWithEncoding:encoding block:block] autorelease];
 }
 
-- (id)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
+- (id)initWithEncoding:(NSStringEncoding)encoding;
 {
-    if (self = [super init])
+	if (self = [super init])
     {
-        _block = [block copy];
 		_encoding = encoding;
 		
         _buffer = [[NSMutableString alloc] init];
-        
         _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
+    }
+    return self;
+}
+
+- (id)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
+{
+    if (self = [self initWithEncoding:encoding])
+    {
+        _block = [block copy];
     }
     return self;
 }
