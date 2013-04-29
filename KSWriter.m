@@ -78,6 +78,72 @@
 	return self;
 }
 
+- (id)initWithOutputStream:(NSOutputStream *)outputStream
+                  encoding:(NSStringEncoding)encoding
+         precomposeStrings:(BOOL)precompose;
+{
+	__block BOOL started = NO;
+	
+	void (^primitiveBlock)(NSString*, CFRange) = ^(NSString *string, CFRange range) {
+		
+		CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding([self encoding]);
+		
+#define BUFFER_LENGTH 1024
+		UInt8 buffer[BUFFER_LENGTH];
+		
+		while (range.length)
+		{
+			CFIndex length;
+			CFIndex chars = CFStringGetBytes((CFStringRef)string,
+											 range,
+											 encoding,
+											 0,
+											 !started, // only want a BOM or similar for the very first write
+											 buffer,
+											 BUFFER_LENGTH,
+											 &length);
+			
+			started = YES;
+			
+			NSInteger written = [outputStream write:buffer maxLength:length];
+			
+			while (written < length)
+			{
+				if (written > 0)
+				{
+					length -= written;
+					written = [outputStream write:&buffer[written] maxLength:length];
+				}
+			}
+			
+			// For characters outside the supported range, do a poor impression of -[NSString dataUsingEncoding:lossy:] and skip them
+			if (chars == 0) chars = 1;
+			
+			range = CFRangeMake(range.location + chars, range.length - chars);
+		}
+	};
+	
+	
+    self = [self initWithBlock:^(NSString *string, NSRange range) {
+		
+		// Precompose if requested
+		if (precompose)
+		{
+			NSMutableString *precomposed = [[string substringWithRange:range] mutableCopy];
+			CFStringNormalize((CFMutableStringRef)precomposed, kCFStringNormalizationFormC);
+			primitiveBlock(precomposed, CFRangeMake(0, precomposed.length));
+			[precomposed release];
+		}
+		else
+		{
+			primitiveBlock(string, CFRangeMake(range.location, range.length));
+		}
+	}];
+	
+	if (self) _encoding = encoding;
+	return self;
+}
+
 - (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
 {
     NSParameterAssert(block);
