@@ -14,9 +14,6 @@
 		225BD9C014F27E1B00F277AE /* KSBufferedWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9B414F27E1A00F277AE /* KSBufferedWriter.h */; };
 		225BD9C114F27E1B00F277AE /* KSBufferedWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */; };
 		225BD9C214F27E1B00F277AE /* KSBufferedWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */; };
-		225BD9C314F27E1B00F277AE /* KSForwardingWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9B614F27E1A00F277AE /* KSForwardingWriter.h */; };
-		225BD9C414F27E1B00F277AE /* KSForwardingWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */; };
-		225BD9C514F27E1B00F277AE /* KSForwardingWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */; };
 		225BD9C614F27E1B00F277AE /* KSMutableDataWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9B814F27E1A00F277AE /* KSMutableDataWriter.h */; };
 		225BD9C714F27E1B00F277AE /* KSMutableDataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */; };
 		225BD9C814F27E1B00F277AE /* KSMutableDataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */; };
@@ -58,8 +55,6 @@
 		22352BA514C6FCB00031F5DD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		225BD9B414F27E1A00F277AE /* KSBufferedWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSBufferedWriter.h; sourceTree = SOURCE_ROOT; };
 		225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSBufferedWriter.m; sourceTree = SOURCE_ROOT; };
-		225BD9B614F27E1A00F277AE /* KSForwardingWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSForwardingWriter.h; sourceTree = SOURCE_ROOT; };
-		225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSForwardingWriter.m; sourceTree = SOURCE_ROOT; };
 		225BD9B814F27E1A00F277AE /* KSMutableDataWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMutableDataWriter.h; sourceTree = SOURCE_ROOT; };
 		225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMutableDataWriter.m; sourceTree = SOURCE_ROOT; };
 		225BD9BA14F27E1A00F277AE /* KSOutputStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOutputStreamWriter.h; sourceTree = SOURCE_ROOT; };
@@ -154,8 +149,6 @@
 			children = (
 				225BD9B414F27E1A00F277AE /* KSBufferedWriter.h */,
 				225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */,
-				225BD9B614F27E1A00F277AE /* KSForwardingWriter.h */,
-				225BD9B714F27E1A00F277AE /* KSForwardingWriter.m */,
 				225BD9B814F27E1A00F277AE /* KSMutableDataWriter.h */,
 				225BD9B914F27E1A00F277AE /* KSMutableDataWriter.m */,
 				225BD9BA14F27E1A00F277AE /* KSOutputStreamWriter.h */,
@@ -251,7 +244,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				225BD9C014F27E1B00F277AE /* KSBufferedWriter.h in Headers */,
-				225BD9C314F27E1B00F277AE /* KSForwardingWriter.h in Headers */,
 				225BD9C614F27E1B00F277AE /* KSMutableDataWriter.h in Headers */,
 				225BD9C914F27E1B00F277AE /* KSOutputStreamWriter.h in Headers */,
 				225BD9CC14F27E1B00F277AE /* KSStringWriter.h in Headers */,
@@ -360,7 +352,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				225BD9C114F27E1B00F277AE /* KSBufferedWriter.m in Sources */,
-				225BD9C414F27E1B00F277AE /* KSForwardingWriter.m in Sources */,
 				225BD9C714F27E1B00F277AE /* KSMutableDataWriter.m in Sources */,
 				225BD9CA14F27E1B00F277AE /* KSOutputStreamWriter.m in Sources */,
 				225BD9CD14F27E1B00F277AE /* KSStringWriter.m in Sources */,
@@ -373,7 +364,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				225BD9C214F27E1B00F277AE /* KSBufferedWriter.m in Sources */,
-				225BD9C514F27E1B00F277AE /* KSForwardingWriter.m in Sources */,
 				225BD9C814F27E1B00F277AE /* KSMutableDataWriter.m in Sources */,
 				225BD9CB14F27E1B00F277AE /* KSOutputStreamWriter.m in Sources */,
 				225BD9CE14F27E1B00F277AE /* KSStringWriter.m in Sources */,

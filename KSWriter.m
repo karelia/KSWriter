@@ -33,6 +33,15 @@
     void    (^_block)(NSString *, NSRange);
 }
 
+#pragma mark Init & Dealloc
+
+- (id)initWithOutputWriter:(id <KSWriter>)output; // designated initializer
+{
+    return [self initWithBlock:^(NSString *string, NSRange range) {
+		[output writeString:string range:range];
+	}];
+}
+
 - (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
 {
     NSParameterAssert(block);
@@ -43,6 +52,22 @@
     }
     return self;
 }
+
+- (id)init;
+{
+	// Create empty block rather than have -writeString:… keep checking if it's nil
+    return [self initWithBlock:^(NSString *string, NSRange range) { }];
+}
+
+- (void)dealloc
+{
+    [self close];
+    NSAssert(!_block, @"-close failed to dispose of writer block");
+    
+    [super dealloc];
+}
+
+#pragma mark Primitive
 
 - (void)writeString:(NSString *)string;
 {
@@ -59,12 +84,6 @@
 - (void)close;
 {
     [_block release]; _block = nil;
-}
-
-- (void)dealloc;
-{
-    [self close];
-    [super dealloc];
 }
 
 @end

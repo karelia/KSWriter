@@ -60,8 +60,13 @@
 
 @interface KSWriter : NSObject <KSWriter>
 
+#pragma mark Creating a Writer
+
+- (id)initWithOutputWriter:(id <KSWriter>)stream;
+
 // The block is called for each string to be written
 - (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
+
 
 @end
 
