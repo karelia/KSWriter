@@ -33,21 +33,15 @@
     void    (^_block)(NSString *, NSRange);
 }
 
-#pragma mark Init & Dealloc
+#pragma mark Encoding as Data
 
-- (id)initWithOutputWriter:(id <KSWriter>)output; // designated initializer
++ (instancetype)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)nsencoding;
 {
-    return [self initWithBlock:^(NSString *string, NSRange range) {
-		[output writeString:string range:range];
-	}];
-}
+	CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(nsencoding);
 
-- (id)initWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
-{
-    self = [self initWithBlock:^(NSString *string, NSRange nsrange) {
+    KSWriter *result = [[self alloc] initWithEncoding:nsencoding block:^(NSString *string, NSRange nsrange) {
 		
 		CFRange range = CFRangeMake(nsrange.location, nsrange.length);
-		CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(self.encoding);
 		
 		CFIndex usedBufLen;
 		CFIndex chars = CFStringGetBytes((CFStringRef)string,
@@ -74,19 +68,17 @@
 		NSAssert(chars == [string length], @"Unexpected number of characters converted");
 	}];
 	
-	if (self) _encoding = encoding;
-	return self;
+	return [result autorelease];
 }
 
-- (id)initWithOutputStream:(NSOutputStream *)outputStream
-                  encoding:(NSStringEncoding)encoding
-         precomposeStrings:(BOOL)precompose;
++ (instancetype)writerWithOutputStream:(NSOutputStream *)outputStream
+							  encoding:(NSStringEncoding)nsencoding
+					 precomposeStrings:(BOOL)precompose;
 {
+	CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(nsencoding);
 	__block BOOL started = NO;
-	
+
 	void (^primitiveBlock)(NSString*, CFRange) = ^(NSString *string, CFRange range) {
-		
-		CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding([self encoding]);
 		
 #define BUFFER_LENGTH 1024
 		UInt8 buffer[BUFFER_LENGTH];
@@ -124,7 +116,7 @@
 	};
 	
 	
-    self = [self initWithBlock:^(NSString *string, NSRange range) {
+    KSWriter *result = [[self alloc] initWithEncoding:nsencoding block:^(NSString *string, NSRange range) {
 		
 		// Precompose if requested
 		if (precompose)
@@ -140,26 +132,48 @@
 		}
 	}];
 	
-	if (self) _encoding = encoding;
-	return self;
+	return [result autorelease];
 }
 
-- (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
+#pragma mark Forwarding Onto Another Writer
+
++ (instancetype)writerWithOutputWriter:(id <KSWriter>)output;
+{
+    return [self writerWithBlock:^(NSString *string, NSRange range) {
+		[output writeString:string range:range];
+	}];
+}
+
+#pragma mark Custom Writing
+
++ (instancetype)writerWithBlock:(void (^)(NSString *string, NSRange range))block;
+{
+	return [[[self alloc] initWithEncoding:NSUTF16StringEncoding block:block] autorelease];
+}
+
+- (id)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
 {
     NSParameterAssert(block);
     
     if (self = [super init])
     {
         _block = [block copy];
-		_encoding = NSUTF16StringEncoding;
+		_encoding = encoding;
     }
     return self;
 }
 
+#pragma mark Lifecycle
+
 - (id)init;
 {
 	// Create empty block rather than have -writeString:… keep checking if it's nil
-    return [self initWithBlock:^(NSString *string, NSRange range) { }];
+    return [self initWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) { }];
+}
+
+- (void)close;
+{
+    [_block release]; _block = nil;
 }
 
 - (void)dealloc
@@ -170,7 +184,7 @@
     [super dealloc];
 }
 
-#pragma mark Primitive
+#pragma mark Writing
 
 - (void)writeString:(NSString *)string;
 {
@@ -183,11 +197,6 @@
 }
 
 - (void)appendString:(NSString *)aString; { [self writeString:aString]; }
-
-- (void)close;
-{
-    [_block release]; _block = nil;
-}
 
 #pragma mark Properties
 

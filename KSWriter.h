@@ -60,19 +60,23 @@
 
 @interface KSWriter : NSObject <KSWriter>
 
-#pragma mark Creating a Writer
+#pragma mark Encoding as Data
 
-- (id)initWithOutputWriter:(id <KSWriter>)stream;
++ (instancetype)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
 
 // if precompose == YES, then Unicode Normalization Form C is applied to the output. This is handy for distributing to platforms which don't have as good unicode support as Apple's. More details at http://developer.apple.com/library/mac/#qa/qa1235/_index.html#//apple_ref/doc/uid/DTS10001757
-- (id)initWithOutputStream:(NSOutputStream *)outputStream
-                  encoding:(NSStringEncoding)encoding
-         precomposeStrings:(BOOL)precompose;
++ (instancetype)writerWithOutputStream:(NSOutputStream *)outputStream
+							  encoding:(NSStringEncoding)encoding
+					 precomposeStrings:(BOOL)precompose;
 
-- (id)initWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
 
+#pragma mark Forwarding Onto Another Writer
++ (instancetype)writerWithOutputWriter:(id <KSWriter>)output;
+
+
+#pragma mark Custom Writing
 // The block is called for each string to be written
-- (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
++ (instancetype)writerWithBlock:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(1)));
 
 
 #pragma mark Properties

@@ -48,18 +48,17 @@
 - (void)testInitiallyEmpty
 {
     MockStream* stream = [[MockStream alloc] init];
-    KSWriter* output = [[KSWriter alloc] initWithOutputStream:stream encoding:NSUTF8StringEncoding precomposeStrings:NO];
+    [KSWriter writerWithOutputStream:stream encoding:NSUTF8StringEncoding precomposeStrings:NO];
 
     [self assertString:stream.written matchesString:@""];
 
-    [output release];
     [stream release];
 }
 
 - (void)testWriting
 {
     MockStream* stream = [[MockStream alloc] init];
-    KSWriter* output = [[KSWriter alloc] initWithOutputStream:stream encoding:NSUTF8StringEncoding precomposeStrings:NO];
+    KSWriter* output = [KSWriter writerWithOutputStream:stream encoding:NSUTF8StringEncoding precomposeStrings:NO];
 
     [output writeString:@"test"];
     [self assertString:stream.written matchesString:@"test"];
@@ -67,7 +66,6 @@
     [output writeString:@"test"];
     [self assertString:stream.written matchesString:@"testtest"];
 
-    [output release];
     [stream release];
 }
 

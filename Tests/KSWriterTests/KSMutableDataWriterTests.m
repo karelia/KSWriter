@@ -21,15 +21,14 @@
 - (void)testInitiallyEmpty
 {
     NSMutableData* data = [NSMutableData data];
-    KSWriter* output = [[KSWriter alloc] initWithMutableData:data encoding:NSUTF8StringEncoding];
+	[KSWriter writerWithMutableData:data encoding:NSUTF8StringEncoding];
     STAssertTrue([data length] == 0, @"doesn't do anything with data until strings are written");
-    [output release];
 }
 
 - (void)testWriting
 {
     NSMutableData* data = [NSMutableData data];
-    KSWriter* output = [[KSWriter alloc] initWithMutableData:data encoding:NSUTF8StringEncoding];
+    KSWriter* output = [KSWriter writerWithMutableData:data encoding:NSUTF8StringEncoding];
 
     [output writeString:@"test"];
     NSString* string1 = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -40,8 +39,6 @@
     NSString* string2 = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     [self assertString:string2 matchesString:@"testtest"];
     [string2 release];
-    
-    [output release];
 }
 
 @end
