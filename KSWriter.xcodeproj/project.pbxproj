@@ -31,7 +31,6 @@
 		225BD9D114F27E1B00F277AE /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; };
 		225BD9DF14F27E8000F277AE /* Compound Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D414F27E8000F277AE /* Compound Tests.plist */; };
 		225BD9E014F27E8000F277AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D514F27E8000F277AE /* InfoPlist.strings */; };
-		225BD9E214F27E8000F277AE /* KSWriterTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D914F27E8000F277AE /* KSWriterTests-Info.plist */; };
 		225BD9E314F27E8000F277AE /* KSMutableDataWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */; };
 		225BD9E414F27E8000F277AE /* KSOutputStreamWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */; };
 		225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
@@ -333,7 +332,6 @@
 			files = (
 				225BD9DF14F27E8000F277AE /* Compound Tests.plist in Resources */,
 				225BD9E014F27E8000F277AE /* InfoPlist.strings in Resources */,
-				225BD9E214F27E8000F277AE /* KSWriterTests-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
