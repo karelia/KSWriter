@@ -155,7 +155,12 @@
 
 + (instancetype)writerWithOutputWriter:(KSWriter *)output;
 {
-	return [self writerWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
+	return [[[self alloc] initWithOutputWriter:output] autorelease];
+}
+
+- (id)initWithOutputWriter:(KSWriter *)output;
+{
+	return [self initWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
 		[output writeString:string range:range];
 	}];
 }
