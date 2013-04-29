@@ -90,6 +90,8 @@
 {
 	[self performTestUsingBlock:^(KSWriter *writer) {
 		
+		[writer writeString:@"beforebuffer"];
+		
 		[writer beginBuffer];
 		[writer writeString:@"test"];
 		[writer discardBuffer];
@@ -99,7 +101,7 @@
 		
 		[writer writeString:@"test2"];
 		
-		STAssertEqualObjects(self.string, @"test2", @"test should be discarded, ready for test2 to be written untouched");
+		STAssertEqualObjects(self.string, @"beforebuffertest2", @"test should be discarded, ready for test2 to be written untouched");
 	}];
 }
 
