@@ -87,7 +87,6 @@
 #pragma mark Buffering
 
 - (void)removeAllCharacters;    // reset, but cunningly keeps memory allocated for speed
-- (void)close;                  // no effect on output/state, but frees any unused memory
 - (void)discardString;          // leaves only buffered content
 
 - (void)beginBuffer; // can be called multiple times to set up a stack of buffers.
