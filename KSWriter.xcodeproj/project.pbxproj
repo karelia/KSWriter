@@ -21,6 +21,7 @@
 		225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
 		22740B1714FC2FE200AD6B33 /* ECParameterisedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22740B1614FC2FE200AD6B33 /* ECParameterisedTestCase.m */; };
 		22A151C914F7C6FA0082C399 /* ECTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A151C114F7C6FA0082C399 /* ECTestCase.m */; };
+		273AB514172E8CD1003F3947 /* KSBufferingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AB513172E8CD1003F3947 /* KSBufferingTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		22A151C714F7C6FA0082C399 /* test-common.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "test-common.sh"; sourceTree = "<group>"; };
 		22C18C0314D3001700AE57DA /* test.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test.sh; sourceTree = "<group>"; };
 		22C1948714C709A1009A4406 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		273AB513172E8CD1003F3947 /* KSBufferingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSBufferingTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */,
 				225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */,
 				225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */,
+				273AB513172E8CD1003F3947 /* KSBufferingTests.m */,
 			);
 			name = KSWriterTests;
 			path = Tests/KSWriterTests;
@@ -333,6 +336,7 @@
 				225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */,
 				22A151C914F7C6FA0082C399 /* ECTestCase.m in Sources */,
 				22740B1714FC2FE200AD6B33 /* ECParameterisedTestCase.m in Sources */,
+				273AB514172E8CD1003F3947 /* KSBufferingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
