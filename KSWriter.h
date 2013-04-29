@@ -67,6 +67,9 @@
 // If the block isn't explicitly encoding data and you've nothing better to choose, go for NSUTF16StringEncoding
 + (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(2)));
 
+// Designated initializer. Generally no need to call directly
+- (id)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
+
 
 #pragma mark Writing
 - (void)writeString:(NSString *)string range:(NSRange)range;	// primitive
