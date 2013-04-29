@@ -230,7 +230,7 @@
     
 	
 	// Write through to output, or append to buffer
-    if (self.numberOfBuffers)
+    if (!_block || self.numberOfBuffers)
 	{
 		// Replace existing characters where possible
 		NSUInteger insertionPoint = [self insertionPoint];
@@ -363,7 +363,9 @@
 
 - (NSUInteger)numberOfBuffers;
 {
-    return _bufferPoints.count;
+    NSUInteger result = _bufferPoints.count;
+	if (!_block) --result;	// the first "buffer" is actually the output
+	return result;
 }
 
 - (void)flushFirstBuffer;
