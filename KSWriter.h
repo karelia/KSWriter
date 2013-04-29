@@ -76,7 +76,8 @@
 
 #pragma mark Custom Writing
 // The block is called for each string to be written
-+ (instancetype)writerWithBlock:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(1)));
+// If the block isn't explicitly encoding data and you've nothing better to choose, go for NSUTF16StringEncoding
++ (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(2)));
 
 
 #pragma mark Properties

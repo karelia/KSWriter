@@ -39,7 +39,7 @@
 {
 	CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(nsencoding);
 
-    KSWriter *result = [[self alloc] initWithEncoding:nsencoding block:^(NSString *string, NSRange nsrange) {
+    return [self writerWithEncoding:nsencoding block:^(NSString *string, NSRange nsrange) {
 		
 		CFRange range = CFRangeMake(nsrange.location, nsrange.length);
 		
@@ -67,8 +67,6 @@
 								 NULL);
 		NSAssert(chars == [string length], @"Unexpected number of characters converted");
 	}];
-	
-	return [result autorelease];
 }
 
 + (instancetype)writerWithOutputStream:(NSOutputStream *)outputStream
@@ -116,7 +114,7 @@
 	};
 	
 	
-    KSWriter *result = [[self alloc] initWithEncoding:nsencoding block:^(NSString *string, NSRange range) {
+    return [self writerWithEncoding:nsencoding block:^(NSString *string, NSRange range) {
 		
 		// Precompose if requested
 		if (precompose)
@@ -131,24 +129,22 @@
 			primitiveBlock(string, CFRangeMake(range.location, range.length));
 		}
 	}];
-	
-	return [result autorelease];
 }
 
 #pragma mark Forwarding Onto Another Writer
 
 + (instancetype)writerWithOutputWriter:(id <KSWriter>)output;
 {
-    return [self writerWithBlock:^(NSString *string, NSRange range) {
+    return [self writerWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) {
 		[output writeString:string range:range];
 	}];
 }
 
 #pragma mark Custom Writing
 
-+ (instancetype)writerWithBlock:(void (^)(NSString *string, NSRange range))block;
++ (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
 {
-	return [[[self alloc] initWithEncoding:NSUTF16StringEncoding block:block] autorelease];
+	return [[[self alloc] initWithEncoding:encoding block:block] autorelease];
 }
 
 - (id)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
