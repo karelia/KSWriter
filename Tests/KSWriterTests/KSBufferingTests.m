@@ -25,14 +25,15 @@
 
 - (void)performTestUsingBlock:(void (^)(KSWriter *writer))block;
 {
+	// Run each test twice, once to an output, and once having the writer build up its own string
 	_output = [NSMutableString string];
 	_writer = [KSWriter writerWithMutableString:_output];
-	
 	block(_writer);
 	
-	// Clean up
-	_writer = nil;
 	_output = nil;
+	_writer = [[KSWriter alloc] init];
+	block(_writer);
+	[_writer release]; _writer = nil;
 }
 
 - (NSString *)string;	// returns what's been written so far
