@@ -34,7 +34,8 @@
 
 
 @protocol KSWriter <KSStringAppending>
-- (void)writeString:(NSString *)string;
+- (void)writeString:(NSString *)string range:(NSRange)range;	// primitive
+- (void)writeString:(NSString *)string;							// convenience
 - (void)close;  // most writers will ignore, but others may use it to trigger an action
 @end
 

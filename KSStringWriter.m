@@ -85,8 +85,13 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
 
 - (void)writeString:(NSString *)string;
 {
+	return [self writeString:string range:NSMakeRange(0, string.length)];
+}
+
+- (void)writeString:(NSString *)string range:(NSRange)nsrange;
+{
     // Flush if needed
-    NSUInteger length = [string length];
+    NSUInteger length = nsrange.length;
     if (_flushOnNextWrite && length)
     {
         [self flush];
@@ -98,7 +103,7 @@ NSString *KSStringWriterWillFlushNotification = @"KSStringWriterWillFlush";
     NSUInteger unusedCapacity = [_buffer length] - insertionPoint;
     
     NSRange range = NSMakeRange(insertionPoint, MIN(length, unusedCapacity));
-    [_buffer replaceCharactersInRange:range withString:string];
+    [_buffer replaceCharactersInRange:range withString:[string substringWithRange:nsrange]];
     
     insertionPoint = (insertionPoint + length);
     [_bufferPoints replacePointerAtIndex:0 withPointer:(void *)insertionPoint];

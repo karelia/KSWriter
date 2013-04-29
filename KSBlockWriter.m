@@ -23,7 +23,12 @@
 
 - (void)writeString:(NSString *)string;
 {
-    _block(string);
+	return [self writeString:string range:NSMakeRange(0, string.length)];
+}
+
+- (void)writeString:(NSString *)string range:(NSRange)nsrange;
+{
+    _block([string substringWithRange:nsrange]);
 }
 
 - (void)appendString:(NSString *)aString; { [self writeString:aString]; }

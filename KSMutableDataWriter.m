@@ -26,7 +26,12 @@
 
 - (void)writeString:(NSString *)string;
 {
-    CFRange range = CFRangeMake(0, CFStringGetLength((CFStringRef)string));
+	return [self writeString:string range:NSMakeRange(0, string.length)];
+}
+
+- (void)writeString:(NSString *)string range:(NSRange)nsrange;
+{
+    CFRange range = CFRangeMake(nsrange.location, nsrange.length);
     CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding([self encoding]);
     
     CFIndex usedBufLen;

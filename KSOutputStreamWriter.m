@@ -81,19 +81,24 @@
 
 - (void)writeString:(NSString *)string;
 {
+	return [self writeString:string range:NSMakeRange(0, string.length)];
+}
+
+- (void)writeString:(NSString *)string range:(NSRange)nsrange;
+{
     if (!_outputStream) return;
     
     // Precompose if requested
     if (_precompose)
     {
-        NSMutableString *precomposed = [string mutableCopy];
+        NSMutableString *precomposed = [[string substringWithRange:nsrange] mutableCopy];
         CFStringNormalize((CFMutableStringRef)precomposed, kCFStringNormalizationFormC);
         [self writePreprocessedString:precomposed];
         [precomposed release];
     }
     else
     {
-        [self writePreprocessedString:string];
+        [self writePreprocessedString:[string substringWithRange:nsrange]];
     }
 }
 

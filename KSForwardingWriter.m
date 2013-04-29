@@ -65,7 +65,12 @@
 
 - (void)writeString:(NSString *)string;
 {
-    [_writer writeString:string];
+	return [self writeString:string range:NSMakeRange(0, string.length)];
+}
+
+- (void)writeString:(NSString *)string range:(NSRange)nsrange;
+{
+    [_writer writeString:string range:nsrange];
 }
 
 - (void)appendString:(NSString *)aString; { [self writeString:aString]; }
