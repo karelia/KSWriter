@@ -100,9 +100,6 @@
 - (void)discardBuffer;  // discards the last buffer
 - (NSUInteger)numberOfBuffers;
 
-// Pass 0 to write directly to the output, or first buffer if there is no output
-- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;
-
 - (void)flush;          // flushes all buffers
 - (void)flushFirstBuffer;   // flushes only the first buffer, leaving any others intact
 

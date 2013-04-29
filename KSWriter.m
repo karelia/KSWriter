@@ -368,13 +368,37 @@
 
 - (void)flushFirstBuffer;
 {
-    [_bufferPoints removePointerAtIndex:([_bufferPoints count] - 1)];
+	NSUInteger indexOfBuffer = [_bufferPoints count] - 1;
+	
+    if (_block)
+	{
+		// Write contents of first buffer directly to output
+		NSUInteger bufferLength = (NSUInteger)[_bufferPoints pointerAtIndex:indexOfBuffer];
+		NSRange bufferRange = NSMakeRange(0, bufferLength);
+		_block(_buffer, bufferRange);
+		
+		// Shift the index of remaining buffers
+		NSUInteger i;
+		for (i = 0; i < indexOfBuffer; i++)
+		{
+			NSUInteger ind = (NSUInteger)[_bufferPoints pointerAtIndex:i];
+			ind -= bufferLength;
+			[_bufferPoints replacePointerAtIndex:i withPointer:(void *)ind];
+		}
+		
+		// Throw away the buffer
+		[_buffer deleteCharactersInRange:bufferRange];
+	}
+
+	// Remove buffer point
+	// If the buffer *is* the output, that's enough, job done!
+	[_bufferPoints removePointerAtIndex:indexOfBuffer];
 }
 
 // Discards the most recent buffer. If there's a lower one in the stack, that is restored
 - (void)discardBuffer;
 {
-    NSParameterAssert([_bufferPoints count] > 1);
+    NSParameterAssert([_bufferPoints count] > (_block ? 0 : 1));
     [_bufferPoints removePointerAtIndex:0];
 }
 
@@ -384,11 +408,22 @@
      postNotificationName:KSWriterWillFlushNotification
      object:self];
     
-    // Ditch all buffer points except the one currently marking -insertionPoint
-    for (NSUInteger i = [_bufferPoints count]-1; i > 0; i--)
-    {
-        [_bufferPoints removePointerAtIndex:i];
-    }
+    if (_block)
+	{
+		// Ditch the buffer points and write what was buffered through to the output
+		NSUInteger length = self.insertionPoint;
+		[_bufferPoints setCount:0];
+		[self writeString:_buffer range:NSMakeRange(0, length)];
+	}
+	else
+	{
+		// Ditch all buffer points except the one currently marking -insertionPoint
+		for (NSUInteger i = [_bufferPoints count]-1; i > 0; i--)
+		{
+			[_bufferPoints removePointerAtIndex:i];
+		}
+	}
+	
     _flushOnNextWrite = NO;
 }
 
