@@ -28,6 +28,51 @@
 #import "KSWriter.h"
 
 
+@implementation KSWriter
+{
+    void    (^_block)(NSString *, NSRange);
+}
+
+- (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
+{
+    NSParameterAssert(block);
+    
+    if (self = [self init])
+    {
+        _block = [block copy];
+    }
+    return self;
+}
+
+- (void)writeString:(NSString *)string;
+{
+	return [self writeString:string range:NSMakeRange(0, string.length)];
+}
+
+- (void)writeString:(NSString *)string range:(NSRange)range;
+{
+    _block(string, range);
+}
+
+- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
+
+- (void)close;
+{
+    [_block release]; _block = nil;
+}
+
+- (void)dealloc;
+{
+    [self close];
+    [super dealloc];
+}
+
+@end
+
+
+#pragma mark -
+
+
 @implementation NSMutableString (KSWriter)
 
 @end

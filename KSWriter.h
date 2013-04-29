@@ -58,5 +58,16 @@
 #pragma mark -
 
 
+@interface KSWriter : NSObject <KSWriter>
+
+// The block is called for each string to be written
+- (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
+
+@end
+
+
+#pragma mark -
+
+
 @interface NSMutableString (KSWriter) <KSStringAppending>
 @end

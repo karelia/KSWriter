@@ -36,9 +36,6 @@
 		225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
 		22740B1714FC2FE200AD6B33 /* ECParameterisedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22740B1614FC2FE200AD6B33 /* ECParameterisedTestCase.m */; };
 		22A151C914F7C6FA0082C399 /* ECTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A151C114F7C6FA0082C399 /* ECTestCase.m */; };
-		273AB50F172E6A7C003F3947 /* KSBlockWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AB50D172E6A7C003F3947 /* KSBlockWriter.h */; };
-		273AB510172E6A7C003F3947 /* KSBlockWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AB50E172E6A7C003F3947 /* KSBlockWriter.m */; };
-		273AB511172E6A8C003F3947 /* KSBlockWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AB50E172E6A7C003F3947 /* KSBlockWriter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +85,6 @@
 		22A151C714F7C6FA0082C399 /* test-common.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "test-common.sh"; sourceTree = "<group>"; };
 		22C18C0314D3001700AE57DA /* test.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test.sh; sourceTree = "<group>"; };
 		22C1948714C709A1009A4406 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		273AB50D172E6A7C003F3947 /* KSBlockWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSBlockWriter.h; sourceTree = SOURCE_ROOT; };
-		273AB50E172E6A7C003F3947 /* KSBlockWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSBlockWriter.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,8 +152,6 @@
 		22352B9914C6FCB00031F5DD /* KSWriter */ = {
 			isa = PBXGroup;
 			children = (
-				273AB50D172E6A7C003F3947 /* KSBlockWriter.h */,
-				273AB50E172E6A7C003F3947 /* KSBlockWriter.m */,
 				225BD9B414F27E1A00F277AE /* KSBufferedWriter.h */,
 				225BD9B514F27E1A00F277AE /* KSBufferedWriter.m */,
 				225BD9B614F27E1A00F277AE /* KSForwardingWriter.h */,
@@ -263,7 +256,6 @@
 				225BD9C914F27E1B00F277AE /* KSOutputStreamWriter.h in Headers */,
 				225BD9CC14F27E1B00F277AE /* KSStringWriter.h in Headers */,
 				225BD9CF14F27E1B00F277AE /* KSWriter.h in Headers */,
-				273AB50F172E6A7C003F3947 /* KSBlockWriter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +365,6 @@
 				225BD9CA14F27E1B00F277AE /* KSOutputStreamWriter.m in Sources */,
 				225BD9CD14F27E1B00F277AE /* KSStringWriter.m in Sources */,
 				225BD9D014F27E1B00F277AE /* KSWriter.m in Sources */,
-				273AB510172E6A7C003F3947 /* KSBlockWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +383,6 @@
 				225BD9E514F27E8000F277AE /* KSStringWriterTests.m in Sources */,
 				22A151C914F7C6FA0082C399 /* ECTestCase.m in Sources */,
 				22740B1714FC2FE200AD6B33 /* ECParameterisedTestCase.m in Sources */,
-				273AB511172E6A8C003F3947 /* KSBlockWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
