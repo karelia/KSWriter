@@ -64,8 +64,14 @@
 
 - (id)initWithOutputWriter:(id <KSWriter>)stream;
 
+- (id)initWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
+
 // The block is called for each string to be written
 - (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
+
+
+#pragma mark Properties
+@property(nonatomic, readonly) NSStringEncoding encoding;	// defaults to UTF-16 for non-data-based writers
 
 
 @end

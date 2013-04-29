@@ -8,7 +8,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-#import "KSMutableDataWriter.h"
+#import "KSWriter.h"
 #import "ECTestCase.h"
 
 @interface KSMutableDataWriterTests : ECTestCase
@@ -21,7 +21,7 @@
 - (void)testInitiallyEmpty
 {
     NSMutableData* data = [NSMutableData data];
-    KSMutableDataWriter* output = [[KSMutableDataWriter alloc] initWithMutableData:data encoding:NSUTF8StringEncoding];
+    KSWriter* output = [[KSWriter alloc] initWithMutableData:data encoding:NSUTF8StringEncoding];
     STAssertTrue([data length] == 0, @"doesn't do anything with data until strings are written");
     [output release];
 }
@@ -29,7 +29,7 @@
 - (void)testWriting
 {
     NSMutableData* data = [NSMutableData data];
-    KSMutableDataWriter* output = [[KSMutableDataWriter alloc] initWithMutableData:data encoding:NSUTF8StringEncoding];
+    KSWriter* output = [[KSWriter alloc] initWithMutableData:data encoding:NSUTF8StringEncoding];
 
     [output writeString:@"test"];
     NSString* string1 = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

@@ -42,6 +42,42 @@
 	}];
 }
 
+- (id)initWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
+{
+    self = [self initWithBlock:^(NSString *string, NSRange nsrange) {
+		
+		CFRange range = CFRangeMake(nsrange.location, nsrange.length);
+		CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(self.encoding);
+		
+		CFIndex usedBufLen;
+		CFIndex chars = CFStringGetBytes((CFStringRef)string,
+										 range,
+										 encoding,
+										 0,
+										 false,
+										 NULL,
+										 0,
+										 &usedBufLen);
+		NSAssert(chars == [string length], @"Unexpected number of characters converted");
+		
+		[data increaseLengthBy:usedBufLen];
+		UInt8 *buffer = [data mutableBytes];
+		
+		chars = CFStringGetBytes((CFStringRef)string,
+								 range,
+								 encoding,
+								 0,
+								 false,
+								 buffer + [data length] - usedBufLen,
+								 usedBufLen,
+								 NULL);
+		NSAssert(chars == [string length], @"Unexpected number of characters converted");
+	}];
+	
+	if (self) _encoding = encoding;
+	return self;
+}
+
 - (id)initWithBlock:(void (^)(NSString *string, NSRange range))block;
 {
     NSParameterAssert(block);
@@ -49,6 +85,7 @@
     if (self = [super init])
     {
         _block = [block copy];
+		_encoding = NSUTF16StringEncoding;
     }
     return self;
 }
@@ -85,6 +122,10 @@
 {
     [_block release]; _block = nil;
 }
+
+#pragma mark Properties
+
+@synthesize encoding = _encoding;
 
 @end
 
