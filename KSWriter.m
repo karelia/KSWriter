@@ -259,7 +259,14 @@
 
 - (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
 {
-    NSUInteger invertedIndex = [_bufferPoints count] - 1 - index;
+    if (index == 0 && _block)
+    {
+        _block(string, NSMakeRange(0, string.length));
+        return;
+    }
+    
+    NSUInteger invertedIndex = [_bufferPoints count] - index;
+    if (!_block) --invertedIndex;
     NSUInteger insertionPoint = (NSUInteger)[_bufferPoints pointerAtIndex:invertedIndex];
     
     

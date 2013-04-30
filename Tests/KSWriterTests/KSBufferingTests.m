@@ -211,4 +211,55 @@
 	}];
 }
 
+- (void)testBypassBuffer;
+{
+    [self performTestUsingBlock:^(KSWriter *writer) {
+        
+        [writer beginBuffer];
+        [writer writeString:@"buffer1"];
+        STAssertTrue(writer.numberOfBuffers == 1, nil);
+        
+        [writer writeString:@"test" toBufferAtIndex:0];
+		STAssertEqualObjects(self.string, @"test", @"String should be written direct to output, leaving the buffer untouched");
+    }];
+}
+
+- (void)testIndirectlyWriteToBuffer;
+{
+    [self performTestUsingBlock:^(KSWriter *writer) {
+        
+        [writer beginBuffer];
+        [writer writeString:@"buffer1"];
+        STAssertTrue(writer.numberOfBuffers == 1, nil);
+        
+        [writer writeString:@"test" toBufferAtIndex:1];
+		STAssertEqualObjects(self.string, @"", @"Nothing should have been written yet");
+        
+        [writer flush];
+        STAssertTrue(writer.numberOfBuffers == 0, nil);
+		STAssertEqualObjects(self.string, @"buffer1test", nil);
+    }];
+}
+
+- (void)testBypassNestedBuffer;
+{
+    [self performTestUsingBlock:^(KSWriter *writer) {
+        
+        [writer beginBuffer];
+        [writer writeString:@"buffer1"];
+        STAssertTrue(writer.numberOfBuffers == 1, nil);
+        
+        [writer beginBuffer];
+        [writer writeString:@"buffer2"];
+        STAssertTrue(writer.numberOfBuffers == 2, nil);
+        
+        [writer writeString:@"test" toBufferAtIndex:1];
+        STAssertEqualObjects(self.string, @"", @"Nothing should have been written yet");
+        
+        [writer flush];
+        STAssertTrue(writer.numberOfBuffers == 0, nil);
+        STAssertEqualObjects(self.string, @"buffer1testbuffer2", @"String should be written direct to output, leaving the buffer untouched");
+    }];
+}
+
 @end
