@@ -23,6 +23,10 @@
 //  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
+//  IMPORTANT: Can't use -[NSString initWithBytes:…] internally, since it seems
+//  to behave differently between encoding and decoding using
+//  NSUnicodeStringEncoding. Rough guess is that routine is setup to assume the
+//  string is an external rep. CFString makes this explicit to solve the problem
 
 
 #import "KSWriter.h"
@@ -31,7 +35,7 @@
 @implementation KSWriter
 {
     void    (^_block)(NSString *, NSRange);
-    NSMutableString *_buffer;
+    NSMutableData   *_buffer;
     NSPointerArray  *_bufferPoints; // stored in reverse order for efficiency
     BOOL            _flushOnNextWrite;
 }
@@ -40,13 +44,13 @@
 
 - (id)init;
 {
-	self = [self initWithEncoding:NSUTF16StringEncoding block:nil];
+	self = [self initWithEncoding:NSUnicodeStringEncoding block:nil];
 	return self;
 }
 
 + (instancetype)writerWithMutableString:(NSMutableString *)output;
 {
-	return [self writerWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) {
+	return [self writerWithEncoding:NSUnicodeStringEncoding block:^(NSString *string, NSRange range) {
 
 		[output appendString:[string substringWithRange:range]];
 	}];
@@ -177,7 +181,7 @@
     }
     else
     {
-        return [self initWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) {
+        return [self initWithEncoding:NSUnicodeStringEncoding block:^(NSString *string, NSRange range) {
             // Pipe to nowhere!
         }];
     }
@@ -197,7 +201,7 @@
     {
 		_encoding = encoding;
 		
-        _buffer = [[NSMutableString alloc] init];
+        _buffer = [[NSMutableData alloc] init];
         _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
         [self beginBuffer];
     }
@@ -221,13 +225,7 @@
     [_block release]; _block = nil;
 	
 	// Prune the buffer back down to size
-    NSUInteger length = [self length];
-    NSUInteger bufferLength = [_buffer length];
-    if (bufferLength > length)
-    {
-        NSRange range = NSMakeRange(length, bufferLength - length);
-        [_buffer deleteCharactersInRange:range];
-    }
+    [_buffer setLength:self.length];
 }
 
 - (void)dealloc
@@ -261,15 +259,39 @@
 	// Write through to output, or append to buffer
     if (!_block || self.numberOfBuffers)
 	{
-        // Replace existing characters where possible
-		NSUInteger insertionPoint = [self insertionPoint];
-		NSUInteger unusedCapacity = [_buffer length] - insertionPoint;
+        NSUInteger insertionPoint = [self insertionPoint];
 		
-		NSRange range = NSMakeRange(insertionPoint, MIN(length, unusedCapacity));
-		[_buffer replaceCharactersInRange:range withString:[string substringWithRange:nsrange]];
-		
-		insertionPoint = (insertionPoint + length);
-		[_bufferPoints replacePointerAtIndex:0 withPointer:(void *)insertionPoint];
+        while (nsrange.length)
+        {
+            NSUInteger unusedCapacity = _buffer.length - insertionPoint;
+            
+            // Copy what we can into the buffer
+            NSUInteger usedLength = 0;
+            
+            if (unusedCapacity) // otherwise bytes argument might evaluate to NULL leading NSString astray
+            {
+                [string getBytes:[_buffer mutableBytes] + insertionPoint
+                       maxLength:unusedCapacity
+                      usedLength:&usedLength
+                        encoding:self.encoding
+                         options:NSStringEncodingConversionAllowLossy
+                           range:nsrange
+                  remainingRange:&nsrange];
+            }
+            
+            // Increase the buffer size if needed
+            if (usedLength == 0)
+            {
+                [_buffer increaseLengthBy:CFStringGetMaximumSizeForEncoding(nsrange.length,
+                                                                            CFStringConvertNSStringEncodingToEncoding(self.encoding))];
+            }
+            else
+            {
+                insertionPoint += usedLength;
+            }
+        }
+        
+        [_bufferPoints replacePointerAtIndex:0 withPointer:(void *)insertionPoint];
 	}
 	else
 	{
@@ -288,16 +310,30 @@
     NSUInteger invertedIndex = [_bufferPoints count] - index;
     if (!_block) --invertedIndex;
     NSUInteger insertionPoint = (NSUInteger)[_bufferPoints pointerAtIndex:invertedIndex];
-    
-    
     NSParameterAssert(insertionPoint <= [self insertionPoint]);
-    [_buffer insertString:string atIndex:insertionPoint];
+    
+    NSMutableData *data = [[NSMutableData alloc] initWithLength:[string maximumLengthOfBytesUsingEncoding:self.encoding]];
+    
+    NSUInteger length;
+    [string getBytes:[data mutableBytes]
+           maxLength:[data length]
+          usedLength:&length
+            encoding:self.encoding
+             options:NSStringEncodingConversionAllowLossy
+               range:NSMakeRange(0, string.length)
+      remainingRange:NULL];
+    
+    [_buffer replaceBytesInRange:NSMakeRange(insertionPoint, 0)
+                       withBytes:[data bytes]
+                          length:length];
+    
+    [data release];
     
     NSUInteger i, count = invertedIndex + 1;
     for (i = 0; i < count; i++)
     {
         NSUInteger ind = (NSUInteger)[_bufferPoints pointerAtIndex:i];
-        ind += [string length];
+        ind += length;
         [_bufferPoints replacePointerAtIndex:i withPointer:(void *)ind];
     }
 }
@@ -327,23 +363,12 @@
     return (NSUInteger)[_bufferPoints pointerAtIndex:([_bufferPoints count] - 1)];
 }
 
-- (unichar)characterAtIndex:(NSUInteger)index;
-{
-    NSParameterAssert(index < [self length]);
-    return [_buffer characterAtIndex:index];
-}
-
-- (void)getCharacters:(unichar *)buffer range:(NSRange)aRange;
-{
-    NSParameterAssert(NSMaxRange(aRange) <= [self length]);
-    return [_buffer getCharacters:buffer range:aRange];
-}
-
 #pragma mark Output
 
 - (NSString *)string;
 {
-    return [_buffer substringToIndex:[self length]];
+    CFStringRef result = CFStringCreateWithBytes(NULL, [_buffer bytes], self.length, CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
+    return [(NSString *)result autorelease];
 }
 
 #pragma mark Buffering
@@ -380,7 +405,7 @@
 - (void)discardString;          // leaves only buffered content
 {
     NSUInteger length = [self length];
-    [_buffer deleteCharactersInRange:NSMakeRange(0, length)];
+    [_buffer replaceBytesInRange:NSMakeRange(0, length) withBytes:NULL length:0];
     
     NSUInteger i, count = [_bufferPoints count];
     for (i = 0; i < count; i++)
@@ -412,8 +437,13 @@
 	{
 		// Write contents of first buffer directly to output
 		NSUInteger bufferLength = (NSUInteger)[_bufferPoints pointerAtIndex:indexOfBuffer];
-		NSRange bufferRange = NSMakeRange(0, bufferLength);
-		_block(_buffer, bufferRange);
+        
+        CFStringRef string = CFStringCreateWithBytes(NULL,
+                                                     [_buffer bytes], bufferLength,
+                                                     CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
+        
+		_block((NSString *)string, NSMakeRange(0, CFStringGetLength(string)));
+        CFRelease(string);
 		
 		// Shift the index of remaining buffers
 		NSUInteger i;
@@ -425,7 +455,7 @@
 		}
 		
 		// Throw away the buffer
-		[_buffer deleteCharactersInRange:bufferRange];
+		[_buffer replaceBytesInRange:NSMakeRange(0, bufferLength) withBytes:NULL length:0];
 	}
 
 	// Remove buffer point
@@ -451,7 +481,13 @@
 		// Ditch the buffer points and write what was buffered through to the output
 		NSUInteger length = self.insertionPoint;
 		[_bufferPoints setCount:0];
-		[self writeString:_buffer range:NSMakeRange(0, length)];
+        
+		CFStringRef string = CFStringCreateWithBytes(NULL,
+                                                     [_buffer bytes], length,
+                                                     CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
+        
+		[self writeString:(NSString *)string range:NSMakeRange(0, CFStringGetLength(string))];
+        CFRelease(string);
 	}
 	else
 	{
@@ -485,7 +521,13 @@
 - (NSString *)debugDescription;
 {
     NSString *result = [self description];
-    result = [result stringByAppendingFormat:@" %@", [_buffer substringToIndex:[self insertionPoint]]];
+    
+    CFStringRef buffer = CFStringCreateWithBytes(NULL,
+                                                 [_buffer bytes], [self insertionPoint],
+                                                 CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
+    
+    result = [result stringByAppendingFormat:@" %@", (NSString *)buffer];
+    CFRelease(buffer);
     return result;
 }
 
