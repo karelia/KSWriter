@@ -199,6 +199,7 @@
 		
         _buffer = [[NSMutableString alloc] init];
         _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
+        [self beginBuffer];
     }
     return self;
 }
@@ -208,6 +209,7 @@
     if (self = [self initWithEncoding:encoding])
     {
         _block = [block copy];
+        if (_block) [self discardBuffer];   // Get rid of the initial "fake" buffer
     }
     return self;
 }
@@ -257,8 +259,6 @@
     
 	
 	// Write through to output, or append to buffer
-    if (!_block && _bufferPoints.count == 0) [self beginBuffer];
-    
     if (!_block || self.numberOfBuffers)
 	{
         // Replace existing characters where possible
