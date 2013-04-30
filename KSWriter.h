@@ -69,7 +69,7 @@
 + (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(2)));
 
 // Designated initializer
-// Fairly pointless to call directly unless you're writing a subclass that has its own -writeString:range: routine
+// If called directly, receiver buffers internally (retrieve using -string), which the encoding may be used as a hint for
 - (id)initWithEncoding:(NSStringEncoding)encoding;
 
 

@@ -41,7 +41,6 @@
 - (id)init;
 {
 	self = [self initWithEncoding:NSUTF16StringEncoding block:nil];
-	[self beginBuffer];
 	return self;
 }
 
@@ -241,9 +240,11 @@
     
 	
 	// Write through to output, or append to buffer
+    if (!_block && _bufferPoints.count == 0) [self beginBuffer];
+    
     if (!_block || self.numberOfBuffers)
 	{
-		// Replace existing characters where possible
+        // Replace existing characters where possible
 		NSUInteger insertionPoint = [self insertionPoint];
 		NSUInteger unusedCapacity = [_buffer length] - insertionPoint;
 		
