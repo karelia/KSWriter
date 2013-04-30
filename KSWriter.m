@@ -215,8 +215,8 @@
     [self close];
     NSAssert(!_block, @"-close failed to dispose of writer block");
     
-    [_buffer release];
-    [_bufferPoints release];
+    [_buffer release]; _buffer = nil;
+    [_bufferPoints release]; _bufferPoints = nil;
     
     [super dealloc];
 }
