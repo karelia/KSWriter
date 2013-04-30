@@ -59,8 +59,8 @@
 
 #pragma mark Forwarding Onto Another Writer
 // If the output writer has an encoding, the returned writer matches it
-+ (instancetype)writerWithOutputWriter:(KSWriter *)output __attribute((nonnull(1)));
-- (id)initWithOutputWriter:(KSWriter *)output __attribute((nonnull(1)));
++ (instancetype)writerWithOutputWriter:(KSWriter *)output;
+- (id)initWithOutputWriter:(KSWriter *)output;
 
 
 #pragma mark Custom Writing

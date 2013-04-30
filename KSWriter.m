@@ -159,11 +159,18 @@
 
 - (id)initWithOutputWriter:(KSWriter *)output;
 {
-    NSParameterAssert(output);
-    
-	return [self initWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
-		[output writeString:string range:range];
-	}];
+    if (output)
+    {
+        return [self initWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
+            [output writeString:string range:range];
+        }];
+    }
+    else
+    {
+        return [self initWithEncoding:NSUTF16StringEncoding block:^(NSString *string, NSRange range) {
+            // Pipe to nowhere!
+        }];
+    }
 }
 
 #pragma mark Custom Writing
