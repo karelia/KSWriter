@@ -440,6 +440,7 @@
 		{
 			[_bufferPoints removePointerAtIndex:i];
 		}
+        NSAssert(_bufferPoints.count == 1, @"Somehow disposed of all buffers");
 	}
 	
     _flushOnNextWrite = NO;
