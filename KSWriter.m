@@ -437,12 +437,16 @@
 	}
 	else
 	{
-		// Ditch all buffer points except the one currently marking -insertionPoint
-		for (NSUInteger i = [_bufferPoints count]-1; i > 0; i--)
-		{
-			[_bufferPoints removePointerAtIndex:i];
-		}
-        NSAssert(_bufferPoints.count == 1, @"Somehow disposed of all buffers");
+        NSUInteger count = _bufferPoints.count;
+        if (count)
+        {
+            // Ditch all buffer points except the one currently marking -insertionPoint
+            for (NSUInteger i = count-1; i > 0; i--)
+            {
+                [_bufferPoints removePointerAtIndex:i];
+            }
+            NSAssert(_bufferPoints.count == 1, @"Somehow disposed of all buffers");
+        }
 	}
 	
     _flushOnNextWrite = NO;
