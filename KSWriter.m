@@ -160,6 +160,8 @@
 
 - (id)initWithOutputWriter:(KSWriter *)output;
 {
+    NSParameterAssert(output);
+    
 	return [self initWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
 		[output writeString:string range:range];
 	}];
