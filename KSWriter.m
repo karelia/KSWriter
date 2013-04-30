@@ -138,10 +138,20 @@
 		// Precompose if requested
 		if (precompose)
 		{
-			NSMutableString *precomposed = [[string substringWithRange:range] mutableCopy];
-			CFStringNormalize((CFMutableStringRef)precomposed, kCFStringNormalizationFormC);
-			primitiveBlock(precomposed, CFRangeMake(0, precomposed.length));
-			[precomposed release];
+            CFMutableStringRef mutable = CFStringCreateMutableCopy(NULL, 0, (CFStringRef)string);
+            
+            // Delete anything outside the desired range
+            if (range.location > 0) CFStringDelete(mutable, CFRangeMake(0, range.location));
+            
+            CFIndex remainingLength = CFStringGetLength(mutable);
+            if (range.length < remainingLength) CFStringDelete(mutable, CFRangeMake(range.length, remainingLength - range.length));
+            
+            // Normalize
+			CFStringNormalize((CFMutableStringRef)mutable, kCFStringNormalizationFormC);
+			primitiveBlock((NSString *)mutable, CFRangeMake(0, CFStringGetLength(mutable)));
+			
+            // Clean up
+            CFRelease(mutable);
 		}
 		else
 		{
