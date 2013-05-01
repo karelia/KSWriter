@@ -200,10 +200,6 @@
 	if (self = [super init])
     {
 		_encoding = encoding;
-		
-        _buffer = [[NSMutableData alloc] init];
-        _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
-        [self beginBuffer];
     }
     return self;
 }
@@ -213,7 +209,6 @@
     if (self = [self initWithEncoding:encoding])
     {
         _block = [block copy];
-        if (_block) [self discardBuffer];   // Get rid of the initial "fake" buffer
     }
     return self;
 }
@@ -259,6 +254,7 @@
 	// Write through to output, or append to buffer
     if (!_block || self.numberOfBuffers)
 	{
+        [self setupBufferingIfNeeded];
         NSUInteger insertionPoint = [self insertionPoint];
 		
         while (nsrange.length)
@@ -418,6 +414,7 @@
 // Can be called multiple times to set up a stack of buffers.
 - (void)beginBuffer;
 {
+    [self setupBufferingIfNeeded];
     [self cancelFlushOnNextWrite];
     [_bufferPoints insertPointer:(void *)[self insertionPoint] atIndex:0];
 }
@@ -504,6 +501,16 @@
 	}
 	
     _flushOnNextWrite = NO;
+}
+
+- (void)setupBufferingIfNeeded;
+{
+    if (!_buffer && !_bufferPoints)
+    {
+        _buffer = [[NSMutableData alloc] init];
+        _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
+        if (!_block) [self beginBuffer];
+    }
 }
 
 #pragma mark Flush-on-write
