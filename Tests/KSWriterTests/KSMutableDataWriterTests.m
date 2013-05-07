@@ -21,14 +21,14 @@
 - (void)testInitiallyEmpty
 {
     NSMutableData* data = [NSMutableData data];
-	[KSWriter writerWithMutableData:data encoding:NSUTF8StringEncoding];
+	[KSWriter writerWithMutableData:data encoding:NSUTF8StringEncoding precomposeStrings:NO];
     STAssertTrue([data length] == 0, @"doesn't do anything with data until strings are written");
 }
 
 - (void)testWriting
 {
     NSMutableData* data = [NSMutableData data];
-    KSWriter* output = [KSWriter writerWithMutableData:data encoding:NSUTF8StringEncoding];
+    KSWriter* output = [KSWriter writerWithMutableData:data encoding:NSUTF8StringEncoding precomposeStrings:NO];
 
     [output writeString:@"test"];
     NSString* string1 = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

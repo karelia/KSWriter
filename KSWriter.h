@@ -50,9 +50,10 @@
 
 #pragma mark Encoding as Data
 
-+ (KSWriter *)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
-
 // if precompose == YES, then Unicode Normalization Form C is applied to the output. This is handy for distributing to platforms which don't have as good unicode support as Apple's. More details at http://developer.apple.com/library/mac/#qa/qa1235/_index.html#//apple_ref/doc/uid/DTS10001757
+
++ (KSWriter *)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding precomposeStrings:(BOOL)precompose;
+
 + (KSWriter *)writerWithOutputStream:(NSOutputStream *)outputStream
                             encoding:(NSStringEncoding)encoding
                    precomposeStrings:(BOOL)precompose;

@@ -62,11 +62,11 @@
 
 #pragma mark Encoding as Data
 
-+ (KSWriter *)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)nsencoding;
++ (KSWriter *)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)nsencoding precomposeStrings:(BOOL)precompose;
 {
 	CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(nsencoding);
 
-    return [self writerWithEncoding:nsencoding block:^(NSString *string, NSRange nsrange) {
+    return [self writerWithEncoding:nsencoding precomposeStrings:precompose block:^(NSString *string, NSRange nsrange) {
 		
 		CFRange range = CFRangeMake(nsrange.location, nsrange.length);
 		
@@ -103,7 +103,7 @@
 	CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(nsencoding);
 	__block BOOL started = NO;
 
-	void (^primitiveBlock)(NSString*, CFRange) = ^(NSString *string, CFRange range) {
+	return [self writerWithEncoding:nsencoding precomposeStrings:(BOOL)precompose block:^(NSString *string, NSRange range) {
 		
 #define BUFFER_LENGTH 1024
 		UInt8 buffer[BUFFER_LENGTH];
@@ -112,7 +112,7 @@
 		{
 			CFIndex length;
 			CFIndex chars = CFStringGetBytes((CFStringRef)string,
-											 range,
+											 CFRangeMake(range.location, range.length),
 											 encoding,
 											 0,
 											 !started, // only want a BOM or similar for the very first write
@@ -136,14 +136,17 @@
 			// For characters outside the supported range, do a poor impression of -[NSString dataUsingEncoding:lossy:] and skip them
 			if (chars == 0) chars = 1;
 			
-			range = CFRangeMake(range.location + chars, range.length - chars);
+			range = NSMakeRange(range.location + chars, range.length - chars);
 		}
-	};
-	
-	
+
+	}];
+}
+
++ (KSWriter *)writerWithEncoding:(NSStringEncoding)nsencoding precomposeStrings:(BOOL)precompose block:(void (^)(NSString *string, NSRange range))block;
+{
     return [self writerWithEncoding:nsencoding block:^(NSString *string, NSRange range) {
-		
-		// Precompose if requested
+        
+        // Precompose if requested
 		if (precompose)
 		{
             CFMutableStringRef mutable = CFStringCreateMutableCopy(NULL, 0, (CFStringRef)string);
@@ -156,16 +159,16 @@
             
             // Normalize
 			CFStringNormalize((CFMutableStringRef)mutable, kCFStringNormalizationFormC);
-			primitiveBlock((NSString *)mutable, CFRangeMake(0, CFStringGetLength(mutable)));
+			block((NSString *)mutable, NSMakeRange(0, CFStringGetLength(mutable)));
 			
             // Clean up
             CFRelease(mutable);
 		}
 		else
 		{
-			primitiveBlock(string, CFRangeMake(range.location, range.length));
+			block(string, range);
 		}
-	}];
+    }];
 }
 
 #pragma mark Forwarding Onto Another Writer
