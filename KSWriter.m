@@ -44,21 +44,25 @@
 
 - (id)init;
 {
-	self = [self initWithEncoding:NSUnicodeStringEncoding block:nil];
-	return self;
+	return [self initWithEncoding:NSUnicodeStringEncoding];
 }
 
-+ (instancetype)writerWithMutableString:(NSMutableString *)output;
++ (KSWriter *)writerWithMutableString:(NSMutableString *)output encoding:(NSStringEncoding)encoding;
 {
-	return [self writerWithEncoding:NSUnicodeStringEncoding block:^(NSString *string, NSRange range) {
+	return [self writerWithEncoding:encoding block:^(NSString *string, NSRange range) {
 
 		[output appendString:[string substringWithRange:range]];
 	}];
 }
 
++ (KSWriter *)stringWriterWithEncoding:(NSStringEncoding)encoding;
+{
+    return [[[KSWriter alloc] initWithEncoding:encoding] autorelease];
+}
+
 #pragma mark Encoding as Data
 
-+ (instancetype)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)nsencoding;
++ (KSWriter *)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)nsencoding;
 {
 	CFStringEncoding encoding = CFStringConvertNSStringEncodingToEncoding(nsencoding);
 
@@ -173,18 +177,11 @@
 
 - (id)initWithOutputWriter:(KSWriter *)output;
 {
-    if (output)
-    {
-        return [self initWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
-            [output writeString:string range:range];
-        }];
-    }
-    else
-    {
-        return [self initWithEncoding:NSUnicodeStringEncoding block:^(NSString *string, NSRange range) {
-            // Pipe to nowhere!
-        }];
-    }
+    NSParameterAssert(output);
+    
+    return [self initWithEncoding:output.encoding block:^(NSString *string, NSRange range) {
+        [output writeString:string range:range];
+    }];
 }
 
 #pragma mark Custom Writing

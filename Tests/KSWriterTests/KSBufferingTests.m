@@ -27,7 +27,7 @@
 {
 	// Run each test twice, once to an output, and once having the writer build up its own string
 	_output = [NSMutableString string];
-	_writer = [KSWriter writerWithMutableString:_output];
+	_writer = [KSWriter writerWithMutableString:_output encoding:NSUnicodeStringEncoding];
 	block(_writer);
 	
 	_output = nil;
@@ -55,7 +55,7 @@
 - (void)testAppend;
 {
 	NSMutableString *output = [NSMutableString stringWithString:@"existing"];
-	KSWriter *writer = [KSWriter writerWithMutableString:output];
+	KSWriter *writer = [KSWriter writerWithMutableString:output encoding:NSUnicodeStringEncoding];
 	[writer writeString:@"test"];
 	
 	STAssertEqualObjects(output, @"existingtest", nil);

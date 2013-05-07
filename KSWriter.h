@@ -40,36 +40,37 @@
 
 #pragma mark Building up Strings
 
-- (id)init;	// strings are buffered in-memory, to be retrieved by -string
+// Strings are buffered in-memory, to be retrieved by -string
+// Encoding provides a hint for efficiency of buffering
++ (KSWriter *)stringWriterWithEncoding:(NSStringEncoding)encoding;
 
 // This can be one of the least efficient types of writer since it might have to create lots of temporary substrings for appending to the mutable string
-// Reports encoding of UTF-16
-+ (instancetype)writerWithMutableString:(NSMutableString *)string __attribute((nonnull(1)));
++ (KSWriter *)writerWithMutableString:(NSMutableString *)string encoding:(NSStringEncoding)encoding __attribute((nonnull(1)));
 
 
 #pragma mark Encoding as Data
 
-+ (instancetype)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
++ (KSWriter *)writerWithMutableData:(NSMutableData *)data encoding:(NSStringEncoding)encoding;
 
 // if precompose == YES, then Unicode Normalization Form C is applied to the output. This is handy for distributing to platforms which don't have as good unicode support as Apple's. More details at http://developer.apple.com/library/mac/#qa/qa1235/_index.html#//apple_ref/doc/uid/DTS10001757
-+ (instancetype)writerWithOutputStream:(NSOutputStream *)outputStream
-							  encoding:(NSStringEncoding)encoding
-					 precomposeStrings:(BOOL)precompose;
++ (KSWriter *)writerWithOutputStream:(NSOutputStream *)outputStream
+                            encoding:(NSStringEncoding)encoding
+                   precomposeStrings:(BOOL)precompose;
 
 
 #pragma mark Forwarding Onto Another Writer
-// If the output writer has an encoding, the returned writer matches it
-+ (instancetype)writerWithOutputWriter:(KSWriter *)output;
-- (id)initWithOutputWriter:(KSWriter *)output;
+// Encoding is taken from the target writer
++ (KSWriter *)writerWithOutputWriter:(KSWriter *)output __attribute((nonnull(1)));
 
 
 #pragma mark Custom Writing
+
 // The block is called for each string to be written
 // If the block isn't explicitly encoding data and you've nothing better to choose, go for NSUTF16StringEncoding
-+ (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(2)));
++ (KSWriter *)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(2)));
 
-// Designated initializer
-// If called directly, receiver buffers internally (retrieve using -string), which the encoding may be used as a hint for
+// Designated initializer, generally only useful for custom subclasses
+// Encoding may be used as a hint for buffering
 - (id)initWithEncoding:(NSStringEncoding)encoding;
 
 
@@ -84,8 +85,8 @@
 
 #pragma mark Output
 
-// If the receiver was configured to pipe through to some output, returns nil
-// Otherwise, a string comprised of all the non-buffered strings written so far
+// A string comprised of all the non-buffered strings written so far
+// nil if the receiver wasn't created using `+stringWriterWithEncoding:`
 - (NSString *)string;
 
 
@@ -102,6 +103,7 @@
 - (void)flushFirstBuffer;   // flushes only the first buffer, leaving any others intact
 
 - (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
+
 
 #pragma mark Flush-on-write
 - (void)flushOnNextWrite;   // calls -flush at next write. Can still use -discardBuffer to effectively cancel this
