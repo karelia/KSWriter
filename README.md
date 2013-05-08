@@ -55,6 +55,7 @@ Release Notes
 
 * The codebase has been collapsed down to a single `KSWriter` class
 * There is no longer a `KSWriter` protocol, just the class. `NSMutableString` is no longer a valid writer; instead create one using `+writerWithMutableString:encoding:` or `+stringWriterWithEncoding:`
+* The primitive writing method is `-writeString:range:` which allows writers to more efficiently extract just the desired range of characters, without the overhead of creating a temporary string. `-writeString:` is still present, of course, as a convenience
 * All `KSWriter` instances have a `.stringEncoding` property. Even when not outputting raw data, this may be used to optimise internal buffers. It's particularly handy for classes like `KSXMLWriter` who build on `KSWriter` and need to know the encoding of their final output
 * Similarly, all writers now have buffering facilities available to them
 * Writing to `NSMutableData` supports precomposing
