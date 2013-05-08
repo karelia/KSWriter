@@ -1,7 +1,15 @@
 Features
 ========
 
-KSWriter shamelessly rips off Java to provide a common interface for building up strings.
+KSWriter shamelessly rips off Java's Writer classes. It allows you to build up strings, piping them straight through to destination's such as:
+
+* `NSMutableString`
+* `NSMutableData` or an `NSOutputStream`
+* A custom block of your design
+
+This is generally more efficient than building up a large `NSMutableString` yourself. When outputting data, KSWriter can perform services like normalizing unicode character sequences for you.
+
+KSWriter also provides buffering facilities for extra control.
 
 Contact
 =======
@@ -13,7 +21,7 @@ Questions about the code should be left as issues at https://github.com/karelia/
 Dependencies
 ============
 
-None beyond Foundation. Probably works back to OS X v10.0 if you were so inclined.
+OS X 10.6 or later. No other dependencies beyond Foundation.
 
 License
 =======
@@ -34,17 +42,19 @@ Usage
 
 ### Vanilla ###
 
-Add `KSWriter.h` and `KSWriter.m` to your project. These files define the common interface `-writeString:` for building up strings, as well as more advanced possibilities. Ideally, make this repo a submodule, but hey, it's your codebase, do whatever you feel like.
-
-You can use `NSMutableString` instances directly, or add other, specialist writers into your project, such as:
-
-* KSStringWriter
-* KSBufferedWriter
-* KSMutableDataWriter
-* KSOutputStreamWriter
-
-`KSForwardingWriter` provides a handy starting point for your own classes that work by piping output through to another `KSWriter`.
+Add `KSWriter.h` and `KSWriter.m` to your project. Ideally, make this repo a submodule, but hey, it's your codebase, do whatever you feel like.
 
 ### XML/HTML/CSS ###
 
 [KSHTMLWriter](https://github.com/karelia/KSHTMLWriter) builds on KSWriter to provide classes for generating string formats such as XML and HTML. It directly includes KSWriter as a submodule. It can also be built as a framework for Mac distribution, with the whole of KSWriter included and exposed.
+
+Release Notes
+=============
+
+### 2.0
+
+* The codebase has been collapsed down to a single `KSWriter` class
+* There is no longer a `KSWriter` protocol, just the class. `NSMutableString` is no longer a valid writer; instead create one using `+writerWithMutableString:encoding:` or `+stringWriterWithEncoding:`
+* All `KSWriter` instances have a `.stringEncoding` property. Even when not outputting raw data, this may be used to optimise internal buffers. It's particularly handy for classes like `KSXMLWriter` who build on `KSWriter` and need to know the encoding of their final output
+* Similarly, all writers now have buffering facilities available to them
+* Writing to `NSMutableData` supports precomposing
