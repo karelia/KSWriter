@@ -28,15 +28,7 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol KSStringAppending <NSObject>
-- (void)appendString:(NSString *)aString;
-@end
-
-
-#pragma mark -
-
-
-@interface KSWriter : NSObject <KSStringAppending>
+@interface KSWriter : NSObject
 
 #pragma mark Building up Strings
 
@@ -119,10 +111,3 @@
 
 
 extern NSString *KSWriterWillFlushNotification;
-
-
-#pragma mark -
-
-
-@interface NSMutableString (KSWriter) <KSStringAppending>
-@end

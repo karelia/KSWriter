@@ -519,10 +519,6 @@
 
 - (void)cancelFlushOnNextWrite; { _flushOnNextWrite = NO; }
 
-#pragma mark KSStringAppending
-
-- (void)appendString:(NSString *)aString; { [self writeString:aString]; }
-
 #pragma mark Debug
 
 - (NSString *)debugDescription;
@@ -542,11 +538,3 @@
 
 
 NSString *KSWriterWillFlushNotification = @"KSWriterWillFlush";
-
-
-#pragma mark -
-
-
-@implementation NSMutableString (KSWriter)
-
-@end
