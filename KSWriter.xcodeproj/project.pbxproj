@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		22352BA714C6FCB00031F5DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9314C6FCB00031F5DD /* Cocoa.framework */; };
 		225BD9D114F27E1B00F277AE /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; };
-		225BD9DF14F27E8000F277AE /* Compound Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D414F27E8000F277AE /* Compound Tests.plist */; };
 		225BD9E014F27E8000F277AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D514F27E8000F277AE /* InfoPlist.strings */; };
 		225BD9E314F27E8000F277AE /* KSMutableDataWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */; };
 		225BD9E414F27E8000F277AE /* KSOutputStreamWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */; };
@@ -44,7 +43,6 @@
 		22352BA414C6FCB00031F5DD /* KSWriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSWriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		225BD9BE14F27E1A00F277AE /* KSWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSWriter.h; sourceTree = SOURCE_ROOT; };
 		225BD9BF14F27E1A00F277AE /* KSWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSWriter.m; sourceTree = SOURCE_ROOT; };
-		225BD9D414F27E8000F277AE /* Compound Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Compound Tests.plist"; sourceTree = "<group>"; };
 		225BD9D614F27E8000F277AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		225BD9D914F27E8000F277AE /* KSWriterTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "KSWriterTests-Info.plist"; sourceTree = "<group>"; };
 		225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMutableDataWriterTests.m; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 		225BD9D314F27E8000F277AE /* KSWriterTests */ = {
 			isa = PBXGroup;
 			children = (
-				225BD9D414F27E8000F277AE /* Compound Tests.plist */,
 				225BD9D514F27E8000F277AE /* InfoPlist.strings */,
 				225BD9D914F27E8000F277AE /* KSWriterTests-Info.plist */,
 			);
@@ -357,7 +354,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				225BD9DF14F27E8000F277AE /* Compound Tests.plist in Resources */,
 				225BD9E014F27E8000F277AE /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
