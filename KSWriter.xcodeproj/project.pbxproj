@@ -119,7 +119,7 @@
 			children = (
 				22352B9914C6FCB00031F5DD /* KSWriter */,
 				228C7D2314CD76F200CC42FE /* Tests */,
-				27CF37931B023A6B00DEABC4 /* KSWriter */,
+				27CF37941B023A6B00DEABC4 /* Supporting Files */,
 				27CF37A01B023A6B00DEABC4 /* KSWriterTests */,
 				22352B9214C6FCB00031F5DD /* Frameworks */,
 				22352B9114C6FCB00031F5DD /* Products */,
@@ -242,20 +242,13 @@
 			path = Tests/Scripts;
 			sourceTree = "<group>";
 		};
-		27CF37931B023A6B00DEABC4 /* KSWriter */ = {
-			isa = PBXGroup;
-			children = (
-				27CF37941B023A6B00DEABC4 /* Supporting Files */,
-			);
-			path = KSWriter;
-			sourceTree = "<group>";
-		};
 		27CF37941B023A6B00DEABC4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				27CF37951B023A6B00DEABC4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			path = KSWriter;
 			sourceTree = "<group>";
 		};
 		27CF37A01B023A6B00DEABC4 /* KSWriterTests */ = {
@@ -641,7 +634,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = KSWriter/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -684,7 +677,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = KSWriter/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
