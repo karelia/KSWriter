@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27CF379B1B023A6B00DEABC4"
-               BuildableName = "KSWriterTests.xctest"
-               BlueprintName = "KSWriterTests"
+               BuildableName = "KSWWriterTests.xctest"
+               BlueprintName = "KSWWriterTests"
                ReferencedContainer = "container:KSWriter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27CF379B1B023A6B00DEABC4"
-               BuildableName = "KSWriterTests.xctest"
-               BlueprintName = "KSWriterTests"
+               BuildableName = "KSWWriterTests.xctest"
+               BlueprintName = "KSWWriterTests"
                ReferencedContainer = "container:KSWriter.xcodeproj">
             </BuildableReference>
          </TestableReference>

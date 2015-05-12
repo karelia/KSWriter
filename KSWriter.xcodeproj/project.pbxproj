@@ -344,9 +344,9 @@
 			productReference = 27CF37921B023A6B00DEABC4 /* KSWriter.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		27CF379B1B023A6B00DEABC4 /* KSWriterTests */ = {
+		27CF379B1B023A6B00DEABC4 /* KSWWriterTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 27CF37A81B023A6B00DEABC4 /* Build configuration list for PBXNativeTarget "KSWriterTests" */;
+			buildConfigurationList = 27CF37A81B023A6B00DEABC4 /* Build configuration list for PBXNativeTarget "KSWWriterTests" */;
 			buildPhases = (
 				27CF37981B023A6B00DEABC4 /* Sources */,
 				27CF37991B023A6B00DEABC4 /* Frameworks */,
@@ -357,7 +357,7 @@
 			dependencies = (
 				27CF379F1B023A6B00DEABC4 /* PBXTargetDependency */,
 			);
-			name = KSWriterTests;
+			name = KSWWriterTests;
 			productName = KSWriterTests;
 			productReference = 27CF379C1B023A6B00DEABC4 /* KSWriterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -395,7 +395,7 @@
 				22352B8F14C6FCB00031F5DD /* libKSWriter */,
 				22352BA314C6FCB00031F5DD /* KSWriterTests */,
 				27CF37911B023A6B00DEABC4 /* KSWriter */,
-				27CF379B1B023A6B00DEABC4 /* KSWriterTests */,
+				27CF379B1B023A6B00DEABC4 /* KSWWriterTests */,
 			);
 		};
 /* End PBXProject section */
@@ -802,7 +802,7 @@
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		27CF37A81B023A6B00DEABC4 /* Build configuration list for PBXNativeTarget "KSWriterTests" */ = {
+		27CF37A81B023A6B00DEABC4 /* Build configuration list for PBXNativeTarget "KSWWriterTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				27CF37A91B023A6B00DEABC4 /* Debug */,
