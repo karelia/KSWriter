@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22352B9414C6FCB00031F5DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9314C6FCB00031F5DD /* Cocoa.framework */; };
 		22352BA714C6FCB00031F5DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9314C6FCB00031F5DD /* Cocoa.framework */; };
-		22352BAA14C6FCB00031F5DD /* liblibKSWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9014C6FCB00031F5DD /* liblibKSWriter.a */; };
-		225BD9CF14F27E1B00F277AE /* KSWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9BE14F27E1A00F277AE /* KSWriter.h */; };
-		225BD9D014F27E1B00F277AE /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; };
 		225BD9D114F27E1B00F277AE /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; };
 		225BD9DF14F27E8000F277AE /* Compound Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D414F27E8000F277AE /* Compound Tests.plist */; };
 		225BD9E014F27E8000F277AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 225BD9D514F27E8000F277AE /* InfoPlist.strings */; };
@@ -31,13 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		22352BA814C6FCB00031F5DD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22352B8714C6FCAF0031F5DD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22352B8F14C6FCB00031F5DD;
-			remoteInfo = KSHTMLWriter;
-		};
 		27CF379E1B023A6B00DEABC4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22352B8714C6FCAF0031F5DD /* Project object */;
@@ -48,7 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		22352B9014C6FCB00031F5DD /* liblibKSWriter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibKSWriter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		22352B9314C6FCB00031F5DD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22352B9614C6FCB00031F5DD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		22352B9714C6FCB00031F5DD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -81,20 +69,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		22352B8D14C6FCB00031F5DD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22352B9414C6FCB00031F5DD /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22352BA014C6FCB00031F5DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				22352BA714C6FCB00031F5DD /* Cocoa.framework in Frameworks */,
-				22352BAA14C6FCB00031F5DD /* liblibKSWriter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +110,6 @@
 		22352B9114C6FCB00031F5DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22352B9014C6FCB00031F5DD /* liblibKSWriter.a */,
 				22352BA414C6FCB00031F5DD /* KSWriterTests.xctest */,
 				27CF37921B023A6B00DEABC4 /* KSWriter.framework */,
 				27CF379C1B023A6B00DEABC4 /* KSWWriterTests.xctest */,
@@ -272,14 +250,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		22352B8E14C6FCB00031F5DD /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				225BD9CF14F27E1B00F277AE /* KSWriter.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		27CF378F1B023A6B00DEABC4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,23 +261,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		22352B8F14C6FCB00031F5DD /* libKSWriter */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22352BB614C6FCB00031F5DD /* Build configuration list for PBXNativeTarget "libKSWriter" */;
-			buildPhases = (
-				22352B8C14C6FCB00031F5DD /* Sources */,
-				22352B8D14C6FCB00031F5DD /* Frameworks */,
-				22352B8E14C6FCB00031F5DD /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = libKSWriter;
-			productName = KSHTMLWriter;
-			productReference = 22352B9014C6FCB00031F5DD /* liblibKSWriter.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		22352BA314C6FCB00031F5DD /* KSWriterTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22352BB914C6FCB00031F5DD /* Build configuration list for PBXNativeTarget "KSWriterTests" */;
@@ -320,7 +273,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				22352BA914C6FCB00031F5DD /* PBXTargetDependency */,
 			);
 			name = KSWriterTests;
 			productName = KSHTMLWriterTests;
@@ -393,7 +345,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22352B8F14C6FCB00031F5DD /* libKSWriter */,
 				22352BA314C6FCB00031F5DD /* KSWriterTests */,
 				27CF37911B023A6B00DEABC4 /* KSWriter */,
 				27CF379B1B023A6B00DEABC4 /* KSWWriterTests */,
@@ -445,14 +396,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		22352B8C14C6FCB00031F5DD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				225BD9D014F27E1B00F277AE /* KSWriter.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		22352B9F14C6FCB00031F5DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -489,11 +432,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		22352BA914C6FCB00031F5DD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22352B8F14C6FCB00031F5DD /* libKSWriter */;
-			targetProxy = 22352BA814C6FCB00031F5DD /* PBXContainerItemProxy */;
-		};
 		27CF379F1B023A6B00DEABC4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 27CF37911B023A6B00DEABC4 /* KSWriter */;
@@ -561,26 +499,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		22352BB714C6FCB00031F5DD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		22352BB814C6FCB00031F5DD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -778,15 +696,6 @@
 			buildConfigurations = (
 				22352BB414C6FCB00031F5DD /* Debug */,
 				22352BB514C6FCB00031F5DD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22352BB614C6FCB00031F5DD /* Build configuration list for PBXNativeTarget "libKSWriter" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22352BB714C6FCB00031F5DD /* Debug */,
-				22352BB814C6FCB00031F5DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
