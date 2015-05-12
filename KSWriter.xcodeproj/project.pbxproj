@@ -177,10 +177,6 @@
 				225BD9D414F27E8000F277AE /* Compound Tests.plist */,
 				225BD9D514F27E8000F277AE /* InfoPlist.strings */,
 				225BD9D914F27E8000F277AE /* KSWriterTests-Info.plist */,
-				225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */,
-				225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */,
-				225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */,
-				273AB513172E8CD1003F3947 /* KSBufferingTests.m */,
 			);
 			name = KSWriterTests;
 			path = Tests/KSWriterTests;
@@ -258,6 +254,10 @@
 		27CF37A01B023A6B00DEABC4 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */,
+				225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */,
+				225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */,
+				273AB513172E8CD1003F3947 /* KSBufferingTests.m */,
 				27CF37A31B023A6B00DEABC4 /* KSWriterTests.m */,
 				27CF37A11B023A6B00DEABC4 /* Supporting Files */,
 			);
