@@ -53,7 +53,7 @@
 		22352B9614C6FCB00031F5DD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		22352B9714C6FCB00031F5DD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		22352B9814C6FCB00031F5DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		22352BA414C6FCB00031F5DD /* KSWriterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSWriterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22352BA414C6FCB00031F5DD /* KSWriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSWriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		225BD9BE14F27E1A00F277AE /* KSWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSWriter.h; sourceTree = SOURCE_ROOT; };
 		225BD9BF14F27E1A00F277AE /* KSWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSWriter.m; sourceTree = SOURCE_ROOT; };
 		225BD9D414F27E8000F277AE /* Compound Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Compound Tests.plist"; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				22352B9014C6FCB00031F5DD /* liblibKSWriter.a */,
-				22352BA414C6FCB00031F5DD /* KSWriterTests.octest */,
+				22352BA414C6FCB00031F5DD /* KSWriterTests.xctest */,
 				27CF37921B023A6B00DEABC4 /* KSWriter.framework */,
 				27CF379C1B023A6B00DEABC4 /* KSWWriterTests.xctest */,
 			);
@@ -324,7 +324,7 @@
 			);
 			name = KSWriterTests;
 			productName = KSHTMLWriterTests;
-			productReference = 22352BA414C6FCB00031F5DD /* KSWriterTests.octest */;
+			productReference = 22352BA414C6FCB00031F5DD /* KSWriterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		27CF37911B023A6B00DEABC4 /* KSWriter */ = {
@@ -370,7 +370,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0630;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Karelia Software";
 				TargetAttributes = {
 					27CF37911B023A6B00DEABC4 = {
@@ -517,7 +517,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -547,7 +546,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -569,6 +567,7 @@
 		22352BB714C6FCB00031F5DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -578,6 +577,7 @@
 		22352BB814C6FCB00031F5DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -587,6 +587,7 @@
 		22352BBA14C6FCB00031F5DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "Tests/KSWriterTests/KSWriterTests-Info.plist";
@@ -597,6 +598,7 @@
 		22352BBB14C6FCB00031F5DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "Tests/KSWriterTests/KSWriterTests-Info.plist";
@@ -805,6 +807,7 @@
 				27CF37A71B023A6B00DEABC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27CF37A81B023A6B00DEABC4 /* Build configuration list for PBXNativeTarget "KSWWriterTests" */ = {
 			isa = XCConfigurationList;
@@ -813,6 +816,7 @@
 				27CF37AA1B023A6B00DEABC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
