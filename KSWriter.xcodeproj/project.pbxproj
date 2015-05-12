@@ -73,7 +73,7 @@
 		273AB513172E8CD1003F3947 /* KSBufferingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSBufferingTests.m; sourceTree = "<group>"; };
 		27CF37921B023A6B00DEABC4 /* KSWriter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSWriter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27CF37951B023A6B00DEABC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27CF379C1B023A6B00DEABC4 /* KSWriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSWriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27CF379C1B023A6B00DEABC4 /* KSWWriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSWWriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27CF37A21B023A6B00DEABC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27CF37A31B023A6B00DEABC4 /* KSWriterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSWriterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,7 +120,7 @@
 				22352B9914C6FCB00031F5DD /* KSWriter */,
 				228C7D2314CD76F200CC42FE /* Tests */,
 				27CF37941B023A6B00DEABC4 /* Supporting Files */,
-				27CF37A01B023A6B00DEABC4 /* KSWriterTests */,
+				27CF37A01B023A6B00DEABC4 /* Tests */,
 				22352B9214C6FCB00031F5DD /* Frameworks */,
 				22352B9114C6FCB00031F5DD /* Products */,
 			);
@@ -132,7 +132,7 @@
 				22352B9014C6FCB00031F5DD /* liblibKSWriter.a */,
 				22352BA414C6FCB00031F5DD /* KSWriterTests.octest */,
 				27CF37921B023A6B00DEABC4 /* KSWriter.framework */,
-				27CF379C1B023A6B00DEABC4 /* KSWriterTests.xctest */,
+				27CF379C1B023A6B00DEABC4 /* KSWWriterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,13 +251,13 @@
 			path = KSWriter;
 			sourceTree = "<group>";
 		};
-		27CF37A01B023A6B00DEABC4 /* KSWriterTests */ = {
+		27CF37A01B023A6B00DEABC4 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				27CF37A31B023A6B00DEABC4 /* KSWriterTests.m */,
 				27CF37A11B023A6B00DEABC4 /* Supporting Files */,
 			);
-			path = KSWriterTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		27CF37A11B023A6B00DEABC4 /* Supporting Files */ = {
@@ -359,7 +359,7 @@
 			);
 			name = KSWWriterTests;
 			productName = KSWriterTests;
-			productReference = 27CF379C1B023A6B00DEABC4 /* KSWriterTests.xctest */;
+			productReference = 27CF379C1B023A6B00DEABC4 /* KSWWriterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -720,7 +720,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = KSWriterTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -756,7 +756,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = KSWriterTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
