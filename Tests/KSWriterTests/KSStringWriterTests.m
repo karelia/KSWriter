@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Karelia Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "KSWriter.h"
 #import "ECTestCase.h"
@@ -21,7 +21,7 @@
 - (void)testInitiallyEmpty
 {
     KSWriter* output = [[KSWriter alloc] init];
-    STAssertTrue([[output string] isEqualToString:@""], @"starts off with empty string");
+    XCTAssertTrue([[output string] isEqualToString:@""], @"starts off with empty string");
     [output release];
 }
 
@@ -29,10 +29,10 @@
 {
     KSWriter* output = [[KSWriter alloc] init];
     [output writeString:@"test"];
-    STAssertTrue([[output string] isEqualToString:@"test"], @"string is correct");
+    XCTAssertTrue([[output string] isEqualToString:@"test"], @"string is correct");
 
     [output writeString:@"test"];
-    STAssertTrue([[output string] isEqualToString:@"testtest"], @"string is correct");
+    XCTAssertTrue([[output string] isEqualToString:@"testtest"], @"string is correct");
 
     [output release];
 }
@@ -41,10 +41,10 @@
 {
     KSWriter* output = [[KSWriter alloc] init];
     [output writeString:@"test"];
-    STAssertTrue([[output string] isEqualToString:@"test"], @"string is correct");
+    XCTAssertTrue([[output string] isEqualToString:@"test"], @"string is correct");
     
     [output removeAllCharacters];
-    STAssertTrue([[output string] isEqualToString:@""], @"string is empty");
+    XCTAssertTrue([[output string] isEqualToString:@""], @"string is empty");
     
     [output release];
 }

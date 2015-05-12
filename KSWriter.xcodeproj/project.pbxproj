@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		22352B9414C6FCB00031F5DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9314C6FCB00031F5DD /* Cocoa.framework */; };
-		22352BA614C6FCB00031F5DD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352BA514C6FCB00031F5DD /* SenTestingKit.framework */; };
 		22352BA714C6FCB00031F5DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9314C6FCB00031F5DD /* Cocoa.framework */; };
 		22352BAA14C6FCB00031F5DD /* libKSWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22352B9014C6FCB00031F5DD /* libKSWriter.a */; };
 		225BD9CF14F27E1B00F277AE /* KSWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9BE14F27E1A00F277AE /* KSWriter.h */; };
@@ -41,7 +40,6 @@
 		22352B9714C6FCB00031F5DD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		22352B9814C6FCB00031F5DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22352BA414C6FCB00031F5DD /* KSWriterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSWriterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22352BA514C6FCB00031F5DD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		225BD9BE14F27E1A00F277AE /* KSWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSWriter.h; sourceTree = SOURCE_ROOT; };
 		225BD9BF14F27E1A00F277AE /* KSWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSWriter.m; sourceTree = SOURCE_ROOT; };
 		225BD9D414F27E8000F277AE /* Compound Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Compound Tests.plist"; sourceTree = "<group>"; };
@@ -77,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22352BA614C6FCB00031F5DD /* SenTestingKit.framework in Frameworks */,
 				22352BA714C6FCB00031F5DD /* Cocoa.framework in Frameworks */,
 				22352BAA14C6FCB00031F5DD /* libKSWriter.a in Frameworks */,
 			);
@@ -110,7 +107,6 @@
 			children = (
 				22C1948714C709A1009A4406 /* WebKit.framework */,
 				22352B9314C6FCB00031F5DD /* Cocoa.framework */,
-				22352BA514C6FCB00031F5DD /* SenTestingKit.framework */,
 				22352B9514C6FCB00031F5DD /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -259,7 +255,7 @@
 			name = KSWriterTests;
 			productName = KSHTMLWriterTests;
 			productReference = 22352BA414C6FCB00031F5DD /* KSWriterTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -267,6 +263,7 @@
 		22352B8714C6FCAF0031F5DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0630;
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Karelia Software";
 			};
@@ -436,22 +433,20 @@
 		22352BBA14C6FCB00031F5DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "Tests/KSWriterTests/KSWriterTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
 		22352BBB14C6FCB00031F5DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "Tests/KSWriterTests/KSWriterTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

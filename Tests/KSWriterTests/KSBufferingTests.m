@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Karelia Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "KSWriter.h"
 
 
-@interface KSBufferingTests : SenTestCase
+@interface KSBufferingTests : XCTestCase
 
 @end
 
@@ -48,7 +48,7 @@
 	[self performTestUsingBlock:^(KSWriter *writer) {
 		
 		[writer writeString:@"test"];
-		STAssertEqualObjects(self.string, @"test", nil);
+		XCTAssertEqualObjects(self.string, @"test");
 	}];
 }
 
@@ -58,7 +58,7 @@
 	KSWriter *writer = [KSWriter writerWithMutableString:output encoding:NSUnicodeStringEncoding];
 	[writer writeString:@"test"];
 	
-	STAssertEqualObjects(output, @"existingtest", nil);
+	XCTAssertEqualObjects(output, @"existingtest");
 }
 
 - (void)testBeginBuffer;
@@ -68,8 +68,8 @@
 		[writer beginBuffer];
 		[writer writeString:@"test"];
 		
-		STAssertTrue(writer.numberOfBuffers == 1, nil);
-		STAssertEqualObjects(self.string, @"", @"Buffer should stop anything being self.string");
+		XCTAssertTrue(writer.numberOfBuffers == 1);
+		XCTAssertEqualObjects(self.string, @"", @"Buffer should stop anything being self.string");
 	}];
 }
 
@@ -82,8 +82,8 @@
 		[writer writeString:@"ing"];	// make sure buffers are properly concatentated
 		[writer flush];
 		
-		STAssertTrue(writer.numberOfBuffers == 0, nil);
-		STAssertEqualObjects(self.string, @"testing", nil);
+		XCTAssertTrue(writer.numberOfBuffers == 0);
+		XCTAssertEqualObjects(self.string, @"testing");
 	}];
 }
 
@@ -97,12 +97,12 @@
 		[writer writeString:@"test"];
 		[writer discardBuffer];
 		
-		STAssertTrue(writer.numberOfBuffers == 0, nil);
-		STAssertEqualObjects(self.string, @"beforebuffer", @"Buffer should stop anything being output");
+		XCTAssertTrue(writer.numberOfBuffers == 0);
+		XCTAssertEqualObjects(self.string, @"beforebuffer", @"Buffer should stop anything being output");
 		
 		[writer writeString:@"test2"];
 		
-		STAssertEqualObjects(self.string, @"beforebuffertest2", @"test should be discarded, ready for test2 to be written untouched");
+		XCTAssertEqualObjects(self.string, @"beforebuffertest2", @"test should be discarded, ready for test2 to be written untouched");
 	}];
 }
 
@@ -112,11 +112,11 @@
 		
 		[writer beginBuffer];
 		[writer beginBuffer];
-		STAssertTrue(writer.numberOfBuffers == 2, nil);
+		XCTAssertTrue(writer.numberOfBuffers == 2);
 		
 		[writer writeString:@"test"];
-		STAssertTrue(writer.numberOfBuffers == 2, nil);
-		STAssertEqualObjects(self.string, @"", @"Buffer should stop anything being output");
+		XCTAssertTrue(writer.numberOfBuffers == 2);
+		XCTAssertEqualObjects(self.string, @"", @"Buffer should stop anything being output");
 	}];
 }
 
@@ -130,8 +130,8 @@
 		[writer writeString:@"test2"];
 		[writer flush];
 		
-		STAssertTrue(writer.numberOfBuffers == 0, nil);
-		STAssertEqualObjects(self.string, @"testtest2", nil);
+		XCTAssertTrue(writer.numberOfBuffers == 0);
+		XCTAssertEqualObjects(self.string, @"testtest2");
 	}];
 }
 
@@ -143,16 +143,16 @@
 		[writer writeString:@"test"];
 		[writer beginBuffer];
 		[writer writeString:@"test2"];
-		STAssertTrue(writer.numberOfBuffers == 2, nil);
+		XCTAssertTrue(writer.numberOfBuffers == 2);
 		
 		[writer flushFirstBuffer];
-		STAssertTrue(writer.numberOfBuffers == 1, nil);
-		STAssertEqualObjects(self.string, @"test", @"The first buffer should flush, but not the second");
+		XCTAssertTrue(writer.numberOfBuffers == 1);
+		XCTAssertEqualObjects(self.string, @"test", @"The first buffer should flush, but not the second");
 		
 		// Make sure the second buffer hasn't been destroyed/damaged
 		[writer flush];
-		STAssertTrue(writer.numberOfBuffers == 0, nil);
-		STAssertEqualObjects(self.string, @"testtest2", @"The first buffer should flush, but not the second");
+		XCTAssertTrue(writer.numberOfBuffers == 0);
+		XCTAssertEqualObjects(self.string, @"testtest2", @"The first buffer should flush, but not the second");
 	}];
 }
 
@@ -162,18 +162,18 @@
 		
 		[writer beginBuffer];
 		[writer writeString:@"test"];
-		STAssertTrue(writer.numberOfBuffers == 1, nil);
+		XCTAssertTrue(writer.numberOfBuffers == 1);
 		
 		[writer beginBuffer];
 		[writer writeString:@"test2"];
-		STAssertTrue(writer.numberOfBuffers == 2, nil);
+		XCTAssertTrue(writer.numberOfBuffers == 2);
 		
 		[writer discardBuffer];
-		STAssertTrue(writer.numberOfBuffers == 1, nil);
+		XCTAssertTrue(writer.numberOfBuffers == 1);
 		
 		[writer flush];
-		STAssertTrue(writer.numberOfBuffers == 0, nil);
-		STAssertEqualObjects(self.string, @"test", @"The first buffer should have made it through, with the second discarded");
+		XCTAssertTrue(writer.numberOfBuffers == 0);
+		XCTAssertEqualObjects(self.string, @"test", @"The first buffer should have made it through, with the second discarded");
 	}];
 }
 
@@ -184,14 +184,14 @@
 		[writer beginBuffer];
 		[writer writeString:@"test"];
 		[writer flushOnNextWrite];
-		STAssertTrue(writer.numberOfBuffers == 1, nil);
+		XCTAssertTrue(writer.numberOfBuffers == 1);
 		
 		[writer writeString:@""];
-		STAssertTrue(writer.numberOfBuffers == 1, @"An empty string should not trigger flushing");
+		XCTAssertTrue(writer.numberOfBuffers == 1, @"An empty string should not trigger flushing");
 		
 		[writer writeString:@"ing"];
-		STAssertTrue(writer.numberOfBuffers == 0, nil);
-		STAssertEqualObjects(self.string, @"testing", nil);
+		XCTAssertTrue(writer.numberOfBuffers == 0);
+		XCTAssertEqualObjects(self.string, @"testing");
 	}];
 }
 
@@ -202,12 +202,12 @@
 		[writer beginBuffer];
 		[writer writeString:@"test"];
 		[writer flushOnNextWrite];
-		STAssertTrue(writer.numberOfBuffers == 1, nil);
+		XCTAssertTrue(writer.numberOfBuffers == 1);
 		
 		[writer cancelFlushOnNextWrite];
 		[writer writeString:@"ing"];
-		STAssertTrue(writer.numberOfBuffers == 1, nil);
-		STAssertEqualObjects(self.string, @"", nil);
+		XCTAssertTrue(writer.numberOfBuffers == 1);
+		XCTAssertEqualObjects(self.string, @"");
 	}];
 }
 
@@ -217,10 +217,10 @@
         
         [writer beginBuffer];
         [writer writeString:@"buffer1"];
-        STAssertTrue(writer.numberOfBuffers == 1, nil);
+        XCTAssertTrue(writer.numberOfBuffers == 1);
         
         [writer writeString:@"test" toBufferAtIndex:0];
-		STAssertEqualObjects(self.string, @"test", @"String should be written direct to output, leaving the buffer untouched");
+		XCTAssertEqualObjects(self.string, @"test", @"String should be written direct to output, leaving the buffer untouched");
     }];
 }
 
@@ -230,14 +230,14 @@
         
         [writer beginBuffer];
         [writer writeString:@"buffer1"];
-        STAssertTrue(writer.numberOfBuffers == 1, nil);
+        XCTAssertTrue(writer.numberOfBuffers == 1);
         
         [writer writeString:@"test" toBufferAtIndex:1];
-		STAssertEqualObjects(self.string, @"", @"Nothing should have been written yet");
+		XCTAssertEqualObjects(self.string, @"", @"Nothing should have been written yet");
         
         [writer flush];
-        STAssertTrue(writer.numberOfBuffers == 0, nil);
-		STAssertEqualObjects(self.string, @"buffer1test", nil);
+        XCTAssertTrue(writer.numberOfBuffers == 0);
+		XCTAssertEqualObjects(self.string, @"buffer1test");
     }];
 }
 
@@ -247,18 +247,18 @@
         
         [writer beginBuffer];
         [writer writeString:@"buffer1"];
-        STAssertTrue(writer.numberOfBuffers == 1, nil);
+        XCTAssertTrue(writer.numberOfBuffers == 1);
         
         [writer beginBuffer];
         [writer writeString:@"buffer2"];
-        STAssertTrue(writer.numberOfBuffers == 2, nil);
+        XCTAssertTrue(writer.numberOfBuffers == 2);
         
         [writer writeString:@"test" toBufferAtIndex:1];
-        STAssertEqualObjects(self.string, @"", @"Nothing should have been written yet");
+        XCTAssertEqualObjects(self.string, @"", @"Nothing should have been written yet");
         
         [writer flush];
-        STAssertTrue(writer.numberOfBuffers == 0, nil);
-        STAssertEqualObjects(self.string, @"buffer1testbuffer2", @"String should be written direct to output, leaving the buffer untouched");
+        XCTAssertTrue(writer.numberOfBuffers == 0);
+        XCTAssertEqualObjects(self.string, @"buffer1testbuffer2", @"String should be written direct to output, leaving the buffer untouched");
     }];
 }
 

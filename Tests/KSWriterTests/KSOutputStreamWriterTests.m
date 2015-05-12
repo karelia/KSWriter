@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Karelia Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "KSWriter.h"
 #import "ECTestCase.h"

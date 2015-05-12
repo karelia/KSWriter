@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Karelia Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "KSWriter.h"
 #import "ECTestCase.h"
@@ -22,7 +22,7 @@
 {
     NSMutableData* data = [NSMutableData data];
 	[KSWriter writerWithMutableData:data encoding:NSUTF8StringEncoding precomposeStrings:NO];
-    STAssertTrue([data length] == 0, @"doesn't do anything with data until strings are written");
+    XCTAssertTrue([data length] == 0, @"doesn't do anything with data until strings are written");
 }
 
 - (void)testWriting
