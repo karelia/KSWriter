@@ -28,6 +28,7 @@
 		27CF37AD1B023DD000DEABC4 /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
 		27CF37AE1B023E2400DEABC4 /* KSBufferingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AB513172E8CD1003F3947 /* KSBufferingTests.m */; };
 		27CF37AF1B023E7E00DEABC4 /* KSMutableDataWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */; };
+		27CF37B01B023F0100DEABC4 /* KSOutputStreamWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DB14F27E8000F277AE /* KSOutputStreamWriterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -483,6 +484,7 @@
 			files = (
 				27CF37A41B023A6B00DEABC4 /* KSWriterTests.m in Sources */,
 				27CF37AE1B023E2400DEABC4 /* KSBufferingTests.m in Sources */,
+				27CF37B01B023F0100DEABC4 /* KSOutputStreamWriterTests.m in Sources */,
 				27CF37AD1B023DD000DEABC4 /* KSStringWriterTests.m in Sources */,
 				27CF37AF1B023E7E00DEABC4 /* KSMutableDataWriterTests.m in Sources */,
 			);

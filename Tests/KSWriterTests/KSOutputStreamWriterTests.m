@@ -9,13 +9,14 @@
 #import <XCTest/XCTest.h>
 
 #import "KSWriter.h"
-#import "ECTestCase.h"
+
 
 @interface MockStream : NSOutputStream
 
 @property (strong, nonatomic) NSMutableString* written;
 
 @end
+
 
 @implementation MockStream
 
@@ -25,12 +26,11 @@
 {
     if (!self.written)
     {
-        self.written = [[[NSMutableString alloc] initWithCapacity:len] autorelease];
+        self.written = [[NSMutableString alloc] initWithCapacity:len];
     }
     
     NSString* string = [[NSString alloc] initWithBytes:bytes length:len encoding:NSUTF8StringEncoding];
     [self.written appendString:string];
-    [string release];
     
     return len;
 }
@@ -38,10 +38,12 @@
 @end
 
 
-@interface KSOutputStreamWriterTests : ECTestCase
+#pragma mark -
 
 
+@interface KSOutputStreamWriterTests : XCTestCase
 @end
+
 
 @implementation KSOutputStreamWriterTests
 
@@ -50,9 +52,7 @@
     MockStream* stream = [[MockStream alloc] init];
     [KSWriter writerWithOutputStream:stream encoding:NSUTF8StringEncoding precomposeStrings:NO];
 
-    [self assertString:stream.written matchesString:@""];
-
-    [stream release];
+    XCTAssertNil(stream.written);
 }
 
 - (void)testWriting
@@ -61,12 +61,10 @@
     KSWriter* output = [KSWriter writerWithOutputStream:stream encoding:NSUTF8StringEncoding precomposeStrings:NO];
 
     [output writeString:@"test"];
-    [self assertString:stream.written matchesString:@"test"];
+    XCTAssertEqualObjects(stream.written, @"test");
 
     [output writeString:@"test"];
-    [self assertString:stream.written matchesString:@"testtest"];
-
-    [stream release];
+    XCTAssertEqualObjects(stream.written, @"testtest");
 }
 
 @end
