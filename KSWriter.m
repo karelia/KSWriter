@@ -56,7 +56,7 @@
 
 + (KSWriter *)stringWriterWithEncoding:(NSStringEncoding)encoding;
 {
-    return [[[KSWriter alloc] initWithEncoding:encoding] autorelease];
+    return [[KSWriter alloc] initWithEncoding:encoding];
 }
 
 #pragma mark Encoding as Data
@@ -158,7 +158,7 @@
             
             // Normalize
 			CFStringNormalize((CFMutableStringRef)mutable, kCFStringNormalizationFormC);
-			block((NSString *)mutable, NSMakeRange(0, CFStringGetLength(mutable)));
+			block((__bridge NSString *)mutable, NSMakeRange(0, CFStringGetLength(mutable)));
 			
             // Clean up
             CFRelease(mutable);
@@ -174,7 +174,7 @@
 
 + (instancetype)writerWithOutputWriter:(KSWriter *)output;
 {
-	return [[[self alloc] initWithOutputWriter:output] autorelease];
+	return [[self alloc] initWithOutputWriter:output];
 }
 
 - (id)initWithOutputWriter:(KSWriter *)output;
@@ -191,7 +191,7 @@
 + (instancetype)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
 {
 	NSParameterAssert(block);
-    return [[[self alloc] initWithEncoding:encoding block:block] autorelease];
+    return [[self alloc] initWithEncoding:encoding block:block];
 }
 
 - (id)initWithEncoding:(NSStringEncoding)encoding;
@@ -216,7 +216,7 @@
 
 - (void)close;
 {
-    [_block release]; _block = nil;
+    _block = NULL;
 	
 	// Prune the buffer back down to size
     [_buffer setLength:self.length];
@@ -225,12 +225,9 @@
 - (void)dealloc
 {
     [self close];
-    NSAssert(!_block, @"-close failed to dispose of writer block");
     
-    [_buffer release]; _buffer = nil;
-    [_bufferPoints release]; _bufferPoints = nil;
-    
-    [super dealloc];
+    _buffer = nil;
+    _bufferPoints = nil;
 }
 
 #pragma mark Writing
@@ -322,8 +319,6 @@
                        withBytes:[data bytes]
                           length:length];
     
-    [data release];
-    
     NSUInteger i, count = invertedIndex + 1;
     for (i = 0; i < count; i++)
     {
@@ -363,7 +358,7 @@
 - (NSString *)string;
 {
     CFStringRef result = CFStringCreateWithBytes(NULL, [_buffer bytes], self.length, CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
-    return [(NSString *)result autorelease];
+    return (NSString *)CFBridgingRelease(result);
 }
 
 #pragma mark Buffering
@@ -392,8 +387,8 @@
 
 - (void)removeAllCharacters;
 {
-    [_bufferPoints release]; _bufferPoints = [[NSPointerArray alloc]
-                                              initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
+    _bufferPoints = [[NSPointerArray alloc]
+                     initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
     [_bufferPoints addPointer:0];
 }
 
@@ -438,7 +433,7 @@
                                                      [_buffer bytes], bufferLength,
                                                      CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
         
-		_block((NSString *)string, NSMakeRange(0, CFStringGetLength(string)));
+		_block((__bridge NSString *)string, NSMakeRange(0, CFStringGetLength(string)));
         CFRelease(string);
 		
 		// Shift the index of remaining buffers
@@ -482,7 +477,7 @@
                                                      [_buffer bytes], length,
                                                      CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
         
-		[self writeString:(NSString *)string range:NSMakeRange(0, CFStringGetLength(string))];
+		[self writeString:(__bridge NSString *)string range:NSMakeRange(0, CFStringGetLength(string))];
         CFRelease(string);
 	}
 	else
@@ -528,7 +523,7 @@
                                                  [_buffer bytes], [self insertionPoint],
                                                  CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
     
-    result = [result stringByAppendingFormat:@" %@", (NSString *)buffer];
+    result = [result stringByAppendingFormat:@" %@", (__bridge NSString *)buffer];
     CFRelease(buffer);
     return result;
 }
