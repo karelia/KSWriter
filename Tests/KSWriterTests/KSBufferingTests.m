@@ -33,7 +33,7 @@
 	_output = nil;
 	_writer = [[KSWriter alloc] init];
 	block(_writer);
-	[_writer release]; _writer = nil;
+	_writer = nil;
 }
 
 - (NSString *)string;	// returns what's been written so far
