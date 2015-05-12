@@ -25,6 +25,7 @@
 		27CF37A41B023A6B00DEABC4 /* KSWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CF37A31B023A6B00DEABC4 /* KSWriterTests.m */; };
 		27CF37AB1B023C2500DEABC4 /* KSWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 225BD9BE14F27E1A00F277AE /* KSWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27CF37AC1B023C2B00DEABC4 /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		27CF37AD1B023DD000DEABC4 /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -479,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27CF37A41B023A6B00DEABC4 /* KSWriterTests.m in Sources */,
+				27CF37AD1B023DD000DEABC4 /* KSStringWriterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

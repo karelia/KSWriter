@@ -9,12 +9,13 @@
 #import <XCTest/XCTest.h>
 
 #import "KSWriter.h"
-#import "ECTestCase.h"
 
-@interface KSStringWriterTests : ECTestCase
+
+@interface KSStringWriterTests : XCTestCase
 
 
 @end
+
 
 @implementation KSStringWriterTests
 
@@ -22,7 +23,6 @@
 {
     KSWriter* output = [[KSWriter alloc] init];
     XCTAssertTrue([[output string] isEqualToString:@""], @"starts off with empty string");
-    [output release];
 }
 
 - (void)testWriting
@@ -33,8 +33,6 @@
 
     [output writeString:@"test"];
     XCTAssertTrue([[output string] isEqualToString:@"testtest"], @"string is correct");
-
-    [output release];
 }
 
 - (void)testClearing
@@ -45,8 +43,6 @@
     
     [output removeAllCharacters];
     XCTAssertTrue([[output string] isEqualToString:@""], @"string is empty");
-    
-    [output release];
 }
 
 @end
