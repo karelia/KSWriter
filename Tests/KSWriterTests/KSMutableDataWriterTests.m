@@ -9,12 +9,13 @@
 #import <XCTest/XCTest.h>
 
 #import "KSWriter.h"
-#import "ECTestCase.h"
 
-@interface KSMutableDataWriterTests : ECTestCase
+
+@interface KSMutableDataWriterTests : XCTestCase
 
 
 @end
+
 
 @implementation KSMutableDataWriterTests
 
@@ -32,13 +33,11 @@
 
     [output writeString:@"test"];
     NSString* string1 = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self assertString:string1 matchesString:@"test"];
-    [string1 release];
+    XCTAssertEqualObjects(string1, @"test");
     
     [output writeString:@"test"];
     NSString* string2 = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self assertString:string2 matchesString:@"testtest"];
-    [string2 release];
+    XCTAssertEqualObjects(string2, @"testtest");
 }
 
 @end

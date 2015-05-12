@@ -27,6 +27,7 @@
 		27CF37AC1B023C2B00DEABC4 /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9BF14F27E1A00F277AE /* KSWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		27CF37AD1B023DD000DEABC4 /* KSStringWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DC14F27E8000F277AE /* KSStringWriterTests.m */; };
 		27CF37AE1B023E2400DEABC4 /* KSBufferingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AB513172E8CD1003F3947 /* KSBufferingTests.m */; };
+		27CF37AF1B023E7E00DEABC4 /* KSMutableDataWriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225BD9DA14F27E8000F277AE /* KSMutableDataWriterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -483,6 +484,7 @@
 				27CF37A41B023A6B00DEABC4 /* KSWriterTests.m in Sources */,
 				27CF37AE1B023E2400DEABC4 /* KSBufferingTests.m in Sources */,
 				27CF37AD1B023DD000DEABC4 /* KSStringWriterTests.m in Sources */,
+				27CF37AF1B023E7E00DEABC4 /* KSMutableDataWriterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
