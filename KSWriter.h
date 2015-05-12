@@ -67,9 +67,9 @@ FOUNDATION_EXPORT const unsigned char KSWriterVersionString[];
 // If the block isn't explicitly encoding data and you've nothing better to choose, go for NSUTF16StringEncoding
 + (KSWriter *)writerWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block __attribute((nonnull(2)));
 
-// Designated initializer, generally only useful for custom subclasses
+// Generally only useful for custom subclasses
 // Encoding may be used as a hint for buffering
-- (id)initWithEncoding:(NSStringEncoding)encoding;
+- (instancetype)initWithEncoding:(NSStringEncoding)encoding NS_DESIGNATED_INITIALIZER;
 
 
 #pragma mark Writing
@@ -85,7 +85,7 @@ FOUNDATION_EXPORT const unsigned char KSWriterVersionString[];
 
 // A string comprised of all the non-buffered strings written so far
 // nil if the receiver wasn't created using `+stringWriterWithEncoding:`
-- (NSString *)string;
+@property (nonatomic, readonly, copy) NSString *string;
 
 
 #pragma mark Buffering
@@ -95,7 +95,7 @@ FOUNDATION_EXPORT const unsigned char KSWriterVersionString[];
 
 - (void)beginBuffer; // can be called multiple times to set up a stack of buffers.
 - (void)discardBuffer;  // discards the last buffer
-- (NSUInteger)numberOfBuffers;
+@property (nonatomic, readonly) NSUInteger numberOfBuffers;
 
 - (void)flush;          // flushes all buffers
 - (void)flushFirstBuffer;   // flushes only the first buffer, leaving any others intact

@@ -41,7 +41,7 @@
 
 #pragma mark Building up Strings
 
-- (id)init;
+- (instancetype)init;
 {
 	return [self initWithEncoding:NSUnicodeStringEncoding];
 }
@@ -177,7 +177,7 @@
 	return [[self alloc] initWithOutputWriter:output];
 }
 
-- (id)initWithOutputWriter:(KSWriter *)output;
+- (instancetype)initWithOutputWriter:(KSWriter *)output;
 {
     NSParameterAssert(output);
     
@@ -194,7 +194,7 @@
     return [[self alloc] initWithEncoding:encoding block:block];
 }
 
-- (id)initWithEncoding:(NSStringEncoding)encoding;
+- (instancetype)initWithEncoding:(NSStringEncoding)encoding;
 {
 	if (self = [super init])
     {
@@ -203,7 +203,7 @@
     return self;
 }
 
-- (id)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
+- (instancetype)initWithEncoding:(NSStringEncoding)encoding block:(void (^)(NSString *string, NSRange range))block;
 {
     if (self = [self initWithEncoding:encoding])
     {
@@ -378,7 +378,7 @@
     for (i = 0; i < count; i++)
     {
         NSUInteger anIndex = (NSUInteger)[_bufferPoints pointerAtIndex:i];
-        [result addObject:[NSNumber numberWithUnsignedInteger:anIndex]];
+        [result addObject:@(anIndex)];
     }
     
     return result;
