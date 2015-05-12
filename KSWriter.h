@@ -26,6 +26,13 @@
 #import <Foundation/Foundation.h>
 
 
+//! Project version number for KSWriter.
+FOUNDATION_EXPORT double KSWriterVersionNumber;
+
+//! Project version string for KSWriter.
+FOUNDATION_EXPORT const unsigned char KSWriterVersionString[];
+
+
 @interface KSWriter : NSObject
 
 #pragma mark Building up Strings
