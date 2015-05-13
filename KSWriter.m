@@ -499,9 +499,11 @@
 
 - (void)setupBufferingIfNeeded;
 {
-    if (!_buffer && !_bufferPoints)
-    {
+    if (!_buffer) {
         _buffer = [[NSMutableData alloc] init];
+    }
+    
+    if (!_bufferPoints) {
         _bufferPoints = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsIntegerPersonality | NSPointerFunctionsOpaqueMemory];
         if (!_block) [self beginBuffer];
     }
