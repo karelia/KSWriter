@@ -525,7 +525,7 @@
                                                  [_buffer bytes], [self insertionPoint],
                                                  CFStringConvertNSStringEncodingToEncoding(self.encoding), NO);
     
-    result = [result stringByAppendingFormat:@" %@", (__bridge NSString *)buffer];
+    result = [result stringByAppendingFormat:@"\n%@", (__bridge NSString *)buffer];
     CFRelease(buffer);
     return result;
 }
