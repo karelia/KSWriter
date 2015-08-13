@@ -140,7 +140,7 @@ FOUNDATION_EXPORT const unsigned char KSWriterVersionString[];
 #pragma mark Output
 
 /**
- For writers craeated using `+stringWriterWithEncoding:`, all the non-buffered output written so far.
+ For writers created using `+stringWriterWithEncoding:`, all the non-buffered output written so far.
  `nil` for other writer types.
  */
 @property (nonatomic, readonly, copy) NSString *string;
