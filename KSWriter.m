@@ -291,43 +291,6 @@
 	}
 }
 
-- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
-{
-    if (index == 0 && _block)
-    {
-        _block(string, NSMakeRange(0, string.length));
-        return;
-    }
-    
-    NSUInteger invertedIndex = [_bufferPoints count] - index;
-    if (!_block) --invertedIndex;
-    NSUInteger insertionPoint = (NSUInteger)[_bufferPoints pointerAtIndex:invertedIndex];
-    NSParameterAssert(insertionPoint <= [self insertionPoint]);
-    
-    NSMutableData *data = [[NSMutableData alloc] initWithLength:[string maximumLengthOfBytesUsingEncoding:self.encoding]];
-    
-    NSUInteger length;
-    [string getBytes:[data mutableBytes]
-           maxLength:[data length]
-          usedLength:&length
-            encoding:self.encoding
-             options:NSStringEncodingConversionAllowLossy
-               range:NSMakeRange(0, string.length)
-      remainingRange:NULL];
-    
-    [_buffer replaceBytesInRange:NSMakeRange(insertionPoint, 0)
-                       withBytes:[data bytes]
-                          length:length];
-    
-    NSUInteger i, count = invertedIndex + 1;
-    for (i = 0; i < count; i++)
-    {
-        NSUInteger ind = (NSUInteger)[_bufferPoints pointerAtIndex:i];
-        ind += length;
-        [_bufferPoints replacePointerAtIndex:i withPointer:(void *)ind];
-    }
-}
-
 #pragma mark Properties
 
 @synthesize encoding = _encoding;

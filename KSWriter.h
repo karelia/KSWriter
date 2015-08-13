@@ -158,8 +158,6 @@ FOUNDATION_EXPORT const unsigned char KSWriterVersionString[];
 - (void)flush;          // flushes all buffers
 - (void)flushFirstBuffer;   // flushes only the first buffer, leaving any others intact
 
-- (void)writeString:(NSString *)string toBufferAtIndex:(NSUInteger)index;   // 0 bypasses all buffers
-
 
 #pragma mark Flush-on-write
 - (void)flushOnNextWrite;   // calls -flush at next write. Can still use -discardBuffer to effectively cancel this
