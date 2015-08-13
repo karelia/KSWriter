@@ -328,18 +328,6 @@
     }
 }
 
-- (void)writeString:(NSString *)string bypassBuffer:(BOOL)bypassBuffer;
-{
-    if (bypassBuffer)
-    {
-        [self writeString:string toBufferAtIndex:0];
-    }
-    else
-    {
-        [self writeString:string];
-    }
-}
-
 #pragma mark Properties
 
 @synthesize encoding = _encoding;
