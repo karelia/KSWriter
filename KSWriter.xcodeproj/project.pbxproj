@@ -209,7 +209,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0630;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Karelia Software";
 				TargetAttributes = {
 					27CF37911B023A6B00DEABC4 = {
